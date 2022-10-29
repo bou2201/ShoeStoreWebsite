@@ -1,4 +1,6 @@
-﻿@{
+﻿@using ShoeStore.Ultitity;
+
+@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
     {
         Layout = (string)parentLayout!;
@@ -7,6 +9,11 @@
     {
         Layout = "/Areas/Identity/Pages/_Layout.cshtml";
     }
+}
+
+@if (User.IsInRole(SD.Role_Admin))
+{
+    Layout = "_AdminLayout";
 }
 
 <div class="admin-title mt-4 mb-4">

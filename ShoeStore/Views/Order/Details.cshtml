@@ -1,19 +1,27 @@
 ﻿@using ShoeStore.Ultitity
 @model ShoeStore.Models.ViewModels.OrderViewModel
 
+@if (User.IsInRole(SD.Role_Admin))
+{
+    Layout = "_AdminLayout";
+}
+else
+{
+    Layout = "_Layout";
+}
+
 @{
     ViewData["Title"] = "Order Details";
-    Layout = "_Layout";
 
     bool isAdmin = User.IsInRole(SD.Role_Admin) || User.IsInRole(SD.Role_Employee);
 }
 
 <form method="post">
-<input asp-for="Order.Id" hidden="hidden">
-<br/>
-<div class="container">
-<div class="card">
-@* <div class="card-header bg-dark text-light ml-0">
+    <input asp-for="Order.Id" hidden="hidden">
+    <br />
+    <div class="container p-0">
+        <div class="card rounded-4">
+            @* <div class="card-header bg-dark text-light ml-0">
                 <div class="row container">
                 <div class="col-12 d-none d-md-block col-md-6 pb-1">
                 <i class="fas fa-shopping-cart"></i> &nbsp; Order Summary
@@ -23,316 +31,335 @@
                 </div>
                 </div>
                 </div> *@
-<div class="card-body">
-<div class="container rounded p-2">
-<div class="row">
-<div class="col-12 col-lg-6 pb-4">
-    <div class="row">
-        <h3 class="title-option mb-4">Delivery Details</h3>
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">Name</div>
-        <div class="col-9">
-            @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped && Model.Order.OrderStatus != SD.StatusCancelled)
-            {
-                <input asp-for="Order.Name" class="form-control"/>
-                <span asp-validation-for="Order.Name"></span>
-            }
-            else
-            {
-                <input asp-for="Order.Name" class="form-control" disabled="disabled"/>
-            }
-        </div>
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">Phone</div>
-        <div class="col-9">
-            @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped && Model.Order.OrderStatus != SD.StatusCancelled)
-            {
-                <input asp-for="Order.PhoneNumber" class="form-control"/>
-                <span asp-validation-for="Order.PhoneNumber"></span>
-            }
-            else
-            {
-                <input asp-for="Order.PhoneNumber" class="form-control" disabled="disabled"/>
-            }
-        </div>
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">Address</div>
-        <div class="col-9">
-            @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped && Model.Order.OrderStatus != SD.StatusCancelled)
-            {
-                <input asp-for="Order.Address" class="form-control"/>
-                <span asp-validation-for="Order.Address"></span>
-            }
-            else
-            {
-                <input asp-for="Order.Address" class="form-control" disabled="disabled"/>
-            }
-        </div>
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">City</div>
-        <div class="col-9">
-            @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped && Model.Order.OrderStatus != SD.StatusCancelled)
-            {
-                <select id="city" asp-for="Order.City" class="form-control" readonly="readonly">
-                    <option value="@Model.Order.City" selected="selected">@Model.Order.City</option>
-                </select>
-                <span asp-validation-for="Order.City"></span>
-            }
-            else
-            {
-                <select id="city" asp-for="Order.City" class="form-control" disabled="disabled">
-                    <option value="@Model.Order.City" selected="selected">@Model.Order.City</option>
-                </select>
-            }
-        </div>
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">District</div>
-        <div class="col-9">
-            @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped && Model.Order.OrderStatus != SD.StatusCancelled)
-            {
-                <select id="district" asp-for="Order.District" class="form-control" readonly="readonly">
-                    <option value="@Model.Order.District" selected="selected">@Model.Order.District</option>
-                </select>
-                <span asp-validation-for="Order.District"></span>
-            }
-            else
-            {
-                <select id="district" asp-for="Order.District" class="form-control" disabled="disabled">
-                    <option value="@Model.Order.District" selected="selected">@Model.Order.District</option>
-                </select>
-            }
-        </div>
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">Ward</div>
-        <div class="col-9">
-            @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped && Model.Order.OrderStatus != SD.StatusCancelled)
-            {
-                <select id="ward" asp-for="Order.Ward" class="form-control" readonly="readonly">
-                    <option value="@Model.Order.Ward" selected="selected">@Model.Order.Ward</option>
-                </select>
-                <span asp-validation-for="Order.Ward"></span>
-            }
-            else
-            {
-                <select id="ward" asp-for="Order.Ward" class="form-control" disabled="disabled">
-                    <option value="@Model.Order.Ward" selected="selected">@Model.Order.Ward</option>
-                </select>
-            }
-        </div>
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">Postal Code</div>
-        <div class="col-9">
-            @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped && Model.Order.OrderStatus != SD.StatusCancelled)
-            {
-                <input asp-for="Order.PostalCode" class="form-control"/>
-                <span asp-validation-for="Order.PostalCode"></span>
-            }
-            else
-            {
-                <input asp-for="Order.PostalCode" class="form-control" disabled="disabled"/>
-            }
-        </div>
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">Email</div>
-        <div class="col-9">
-            <input asp-for="Order.ApplicationUser.Email" class="form-control" disabled="disabled"/>
-        </div>
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">Order Date</div>
-        <div class="col-9">
-            <input value="@Model.Order.OrderDate.ToShortDateString()" class="form-control" disabled="disabled"/>
-        </div>
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">Carrier</div>
-        <div class="col-9">
-            @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped && Model.Order.OrderStatus != SD.StatusCancelled)
-            {
-                <input asp-for="Order.Carrier" id="carrier" class="form-control"/>
-            }
-            else
-            {
-                <input asp-for="Order.Carrier" disabled="disabled" id="carrier" class="form-control"/>
-            }
-        </div>
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">Tracking</div>
-        <div class="col-9">
-            @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped && Model.Order.OrderStatus != SD.StatusCancelled)
-            {
-                <input asp-for="Order.TrackingNumber" id="trackingNumber" class="form-control"/>
-            }
-            else
-            {
-                <input asp-for="Order.TrackingNumber" disabled="disabled" id="trackingNumber" class="form-control"/>
-            }
-        </div>
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">Shipping Date</div>
-        <div class="col-9">
-            <input value="@Model.Order.ShippingDate.ToShortDateString()" readonly
-                   class="form-control"/>
-        </div>
-    </div>
-    @if (isAdmin)
-    {
-        <div class="row mb-3 d-flex align-items-center">
-            <div class="col-3">Session ID</div>
-            <div class="col-9">
-                <input asp-for="Order.SessionId" readonly class="form-control"/>
-            </div>
-        </div>
-        <div class="row mb-3 d-flex align-items-center">
-            <div class="col-3">Payment Intent Id</div>
-            <div class="col-9">
-                <input asp-for="Order.PaymentIntentId" readonly class="form-control"/>
-            </div>
-        </div>
-    }
-    <div class="row mb-3 d-flex align-items-center">
-        @if (Model.Order.SessionId == null)
-        {
-            <div class="col-3">Payment Due Date</div>
-            <div class="col-9">
-                <input value="@Model.Order.PaymentDueDate.ToShortDateString()" readonly
-                       class="form-control"/>
-            </div>
-        }
-        else
-        {
-            <div class="col-3">Payment Date</div>
-            <div class="col-9">
-                <input value="@Model.Order.PaymentDate.ToShortDateString()" readonly
-                       class="form-control"/>
-            </div>
-        }
-    </div>
-    <div class="row mb-3 d-flex align-items-center">
-        <div class="col-3">Payment Status</div>
-        <div class="col-9">
-            <input asp-for="Order.PaymentStatus" readonly class="form-control"/>
-        </div>
-    </div>
-    <div class="d-flex justify-content-center mt-4">
-        @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped && Model.Order.OrderStatus != SD.StatusCancelled)
-        {
-            <button asp-action="UpdateOrderDetail" type="submit" class="btn-save">
-                Update Order Details
-            </button>
-        }
-    </div>
-</div>
-<div class="col-12 col-lg-5 offset-lg-1">
-    <h3 class="title-option mb-4">Order Summary</h3>
-    <label class="btn-save w-100 d-flex justify-content-center mb-4">
-        Order Status -
-        @Model.Order.OrderStatus
-    </label>
+            <div class="card-body">
+                <div class="container p-4">
+                    <div class="row">
+                        <div class="col-12 col-lg-6 pb-4">
+                            <div class="row">
+                                <h3 class="title-option mb-4">Delivery Details</h3>
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">Name</div>
+                                <div class="col-9">
+                                    @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped &&
+                                    Model.Order.OrderStatus != SD.StatusCancelled)
+                                    {
+                                        <input asp-for="Order.Name" class="form-control" />
+                                        <span asp-validation-for="Order.Name"></span>
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="Order.Name" class="form-control" disabled="disabled" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">Phone</div>
+                                <div class="col-9">
+                                    @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped &&
+                                    Model.Order.OrderStatus != SD.StatusCancelled)
+                                    {
+                                        <input asp-for="Order.PhoneNumber" class="form-control" />
+                                        <span asp-validation-for="Order.PhoneNumber"></span>
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="Order.PhoneNumber" class="form-control" disabled="disabled" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">Address</div>
+                                <div class="col-9">
+                                    @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped &&
+                                    Model.Order.OrderStatus != SD.StatusCancelled)
+                                    {
+                                        <input asp-for="Order.Address" class="form-control" />
+                                        <span asp-validation-for="Order.Address"></span>
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="Order.Address" class="form-control" disabled="disabled" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">City</div>
+                                <div class="col-9">
+                                    @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped &&
+                                    Model.Order.OrderStatus != SD.StatusCancelled)
+                                    {
+                                        <select id="city" asp-for="Order.City" class="form-control" readonly="readonly">
+                                            <option value="@Model.Order.City" selected="selected">@Model.Order.City</option>
+                                        </select>
+                                        <span asp-validation-for="Order.City"></span>
+                                    }
+                                    else
+                                    {
+                                        <select id="city" asp-for="Order.City" class="form-control" disabled="disabled">
+                                            <option value="@Model.Order.City" selected="selected">@Model.Order.City</option>
+                                        </select>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">District</div>
+                                <div class="col-9">
+                                    @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped &&
+                                    Model.Order.OrderStatus != SD.StatusCancelled)
+                                    {
+                                        <select id="district" asp-for="Order.District" class="form-control"
+                                        readonly="readonly">
+                                            <option value="@Model.Order.District" selected="selected">@Model.Order.District
+                                            </option>
+                                        </select>
+                                        <span asp-validation-for="Order.District"></span>
+                                    }
+                                    else
+                                    {
+                                        <select id="district" asp-for="Order.District" class="form-control"
+                                        disabled="disabled">
+                                            <option value="@Model.Order.District" selected="selected">@Model.Order.District
+                                            </option>
+                                        </select>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">Ward</div>
+                                <div class="col-9">
+                                    @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped &&
+                                    Model.Order.OrderStatus != SD.StatusCancelled)
+                                    {
+                                        <select id="ward" asp-for="Order.Ward" class="form-control" readonly="readonly">
+                                            <option value="@Model.Order.Ward" selected="selected">@Model.Order.Ward</option>
+                                        </select>
+                                        <span asp-validation-for="Order.Ward"></span>
+                                    }
+                                    else
+                                    {
+                                        <select id="ward" asp-for="Order.Ward" class="form-control" disabled="disabled">
+                                            <option value="@Model.Order.Ward" selected="selected">@Model.Order.Ward</option>
+                                        </select>
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">Postal Code</div>
+                                <div class="col-9">
+                                    @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped &&
+                                    Model.Order.OrderStatus != SD.StatusCancelled)
+                                    {
+                                        <input asp-for="Order.PostalCode" class="form-control" />
+                                        <span asp-validation-for="Order.PostalCode"></span>
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="Order.PostalCode" class="form-control" disabled="disabled" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">Email</div>
+                                <div class="col-9">
+                                    <input asp-for="Order.ApplicationUser.Email" class="form-control"
+                                        disabled="disabled" />
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">Order Date</div>
+                                <div class="col-9">
+                                    <input value="@Model.Order.OrderDate.ToShortDateString()" class="form-control"
+                                        disabled="disabled" />
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">Carrier</div>
+                                <div class="col-9">
+                                    @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped &&
+                                    Model.Order.OrderStatus != SD.StatusCancelled)
+                                    {
+                                        <input asp-for="Order.Carrier" id="carrier" class="form-control" />
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="Order.Carrier" disabled="disabled" id="carrier"
+                                        class="form-control" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">Tracking</div>
+                                <div class="col-9">
+                                    @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped &&
+                                    Model.Order.OrderStatus != SD.StatusCancelled)
+                                    {
+                                        <input asp-for="Order.TrackingNumber" id="trackingNumber" class="form-control" />
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="Order.TrackingNumber" disabled="disabled" id="trackingNumber"
+                                        class="form-control" />
+                                    }
+                                </div>
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">Shipping Date</div>
+                                <div class="col-9">
+                                    <input value="@Model.Order.ShippingDate.ToShortDateString()" readonly
+                                        class="form-control" />
+                                </div>
+                            </div>
+                            @if (isAdmin)
+                            {
+                                <div class="row mb-3 d-flex align-items-center">
+                                    <div class="col-3">Session ID</div>
+                                    <div class="col-9">
+                                        <input asp-for="Order.SessionId" readonly class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="row mb-3 d-flex align-items-center">
+                                    <div class="col-3">Payment Intent Id</div>
+                                    <div class="col-9">
+                                        <input asp-for="Order.PaymentIntentId" readonly class="form-control" />
+                                    </div>
+                                </div>
+                            }
+                            <div class="row mb-3 d-flex align-items-center">
+                                @if (Model.Order.SessionId == null)
+                                {
+                                    <div class="col-3">Payment Due Date</div>
+                                    <div class="col-9">
+                                        <input value="@Model.Order.PaymentDueDate.ToShortDateString()" readonly
+                                        class="form-control" />
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-3">Payment Date</div>
+                                    <div class="col-9">
+                                        <input value="@Model.Order.PaymentDate.ToShortDateString()" readonly
+                                        class="form-control" />
+                                    </div>
+                                }
+                            </div>
+                            <div class="row mb-3 d-flex align-items-center">
+                                <div class="col-3">Payment Status</div>
+                                <div class="col-9">
+                                    <input asp-for="Order.PaymentStatus" readonly class="form-control" />
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center mt-4">
+                                @if (isAdmin && Model.Order.OrderStatus != SD.StatusShipped && Model.Order.OrderStatus
+                                != SD.StatusCancelled)
+                                {
+                                    <button asp-action="UpdateOrderDetail" type="submit" class="btn-save">
+                                        Update Order Details
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5 offset-lg-1">
+                            <h3 class="title-option mb-4">Order Summary</h3>
+                            <label class="btn-save w-100 d-flex justify-content-center mb-4">
+                                Order Status -
+                                @Model.Order.OrderStatus
+                            </label>
 
-    <ul class="list-group mb-3">
-        @foreach (var detail in Model.OrderDetails)
-        {
-            <li class="list-group-item d-flex justify-content-between py-3 px-4">
-                <div class="d-flex justify-content-between align-items-start">
-                    <div class="col-8">
-                        <h6 class="my-0 text-dark mb-2">
-                            @detail.ShoeSize.ShoeColor.Shoe.Name
-                            @detail.ShoeSize.ShoeColor.Color!.Name
-                        </h6>
-                        <p class="text-muted small mb-0">Price each: @detail.PriceEach.ToString("C")</p>
-                        <p class="text-muted small mb-0">Quantity: @detail.Count</p>
-                    </div>
-                    <div class="col-4 text-end">
-                        <p class="text-dark fw-bold">
-                            <em>
-                                @((detail.Count *
-                                   detail.PriceEach).ToString("C"))
-                            </em>
-                        </p>
+                            <ul class="list-group mb-3">
+                                @foreach (var detail in Model.OrderDetails)
+                                {
+                                    <li class="list-group-item d-flex justify-content-between py-3 px-4">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div class="col-8">
+                                                <h6 class="my-0 text-dark mb-2">
+                                                    @detail.ShoeSize.ShoeColor.Shoe.Name
+                                                    @detail.ShoeSize.ShoeColor.Color!.Name
+                                                </h6>
+                                                <p class="text-muted small mb-0">Price each: @detail.PriceEach.ToString("C")
+                                                </p>
+                                                <p class="text-muted small mb-0">Quantity: @detail.Count</p>
+                                            </div>
+                                            <div class="col-4 text-end">
+                                                <p class="text-dark fw-bold">
+                                                    <em>
+                                                        @((detail.Count *
+                                                    detail.PriceEach).ToString("C"))
+                                                    </em>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+
+                                <li class="list-group-item btn-save mt-4 py-3 px-4">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h6 class="text-white mb-0 ">Total Due</h6>
+                                        <h5 class="text-white mb-0 fw-bold">
+                                            <em>@Model.Order.OrderTotal.ToString("C")</em>
+                                        </h5>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="cart-back mt-4">
+                                <a asp-action="Index" class="text-dark mb-4">
+                                    <i class="fa-solid fa-left-long"></i>
+                                    <p class="text-dark">Back To Order Management</p>
+                                </a>
+                            </div>
+
+
+                            @if (Model.Order.PaymentStatus == SD.PaymentStatusDelayedPayment
+                            && Model.Order.OrderStatus == SD.StatusShipped)
+                            {
+                                <button asp-action="" type="submit" class="btn btn-success form-control my-1">
+                                    Pay Now
+                                </button>
+                            }
+                            @if (isAdmin)
+                            {
+                                if (Model.Order.OrderStatus == SD.StatusApproved)
+                                {
+                                    <button asp-action="StartProcessing" type="submit" class="btn-back mb-3 d-block mx-auto"
+                                style="border: none">
+                                        Start Processing
+                                    </button>
+                                }
+                                if (Model.Order.OrderStatus == SD.StatusInpProcess)
+                                {
+                                    <button asp-action="ShipOrder" onclick="return ValidateInput()" type="submit"
+                                class="btn-back mb-3 d-block mx-auto" style="border: none">
+                                        Ship Order
+                                    </button>
+                                }
+
+                                if (Model.Order.OrderStatus != SD.StatusRefunded && Model.Order.OrderStatus !=
+                                SD.StatusCancelled
+                                && Model.Order.OrderStatus != SD.StatusShipped)
+                                {
+                                    <button asp-action="CancelOrder" type="submit" class="btn-back mb-3 d-block mx-auto"
+                                style="border: none">
+                                        Cancel Order
+                                    </button>
+                                }
+                            }
+                        </div>
                     </div>
                 </div>
-            </li>
-        }
-
-        <li class="list-group-item btn-save mt-4 py-3 px-4">
-            <div class="d-flex justify-content-between align-items-center">
-                <h6 class="text-white mb-0 ">Total Due</h6>
-                <h5 class="text-white mb-0 fw-bold">
-                    <em>@Model.Order.OrderTotal.ToString("C")</em>
-                </h5>
             </div>
-        </li>
-    </ul>
-    <div class="cart-back mt-4">
-        <a asp-action="Index" class="text-dark mb-4">
-            <i class="fa-solid fa-left-long"></i>
-            <p class="text-dark">Back To Order Management</p>
-        </a>
+        </div>
     </div>
-
-
-    @if (Model.Order.PaymentStatus == SD.PaymentStatusDelayedPayment
-         && Model.Order.OrderStatus == SD.StatusShipped)
-    {
-        <button asp-action="" type="submit" class="btn btn-success form-control my-1">
-            Pay Now
-        </button>
-    }
-    @if (isAdmin)
-    {
-        if (Model.Order.OrderStatus == SD.StatusApproved)
-        {
-            <button asp-action="StartProcessing" type="submit" class="btn-back mb-3 d-block mx-auto"
-                    style="border: none">
-                Start Processing
-            </button>
-        }
-        if (Model.Order.OrderStatus == SD.StatusInpProcess)
-        {
-            <button asp-action="ShipOrder" onclick="return ValidateInput()" type="submit"
-                    class="btn-back mb-3 d-block mx-auto" style="border: none">
-                Ship Order
-            </button>
-        }
-
-        if (Model.Order.OrderStatus != SD.StatusRefunded && Model.Order.OrderStatus !=
-            SD.StatusCancelled
-            && Model.Order.OrderStatus != SD.StatusShipped)
-        {
-            <button asp-action="CancelOrder" type="submit" class="btn-back mb-3 d-block mx-auto"
-                    style="border: none">
-                Cancel Order
-            </button>
-        }
-    }
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </form>
 
 @section Scripts
 {
-    @if(isAdmin)
-    {
-        <script src="/js/Province.js"></script>
-    }
-    <partial name="_ValidationScriptsPartial"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script>
+@if(isAdmin)
+{
+<script src="/js/Province.js"></script>
+}
+<partial name="_ValidationScriptsPartial" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script>
     function ValidateInput() {
         if (document.querySelector('#carrier').value == '') {
             toastr.error('Please enter carrier number')

@@ -1,8 +1,18 @@
-﻿@model IEnumerable<ShopOrder>
+﻿@using ShoeStore.Ultitity;
+@model IEnumerable<ShopOrder>
+
+@if (User.IsInRole(SD.Role_Admin))
+{
+    Layout = "_AdminLayout";
+}
+else
+{
+    Layout = "_Layout";
+}
 
 @{
     ViewData["Title"] = "Order";
-    Layout = "_Layout";
+    @* Layout = "_Layout"; *@
 
     var status = Context.Request.Query["status"];
     string pending = "";

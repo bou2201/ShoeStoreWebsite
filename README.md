@@ -2,8 +2,6 @@
 
 > **Vickies.D Fashion** is the second term project of web application development course at **[VTC Academy](https://vtc.edu.vn/)**
 
-## [Demo Project](http://hoclaptrinhtheky21.tk/)
-
 ## Members
 - Nguyen Lam Chuc (Front-End) - https://www.facebook.com/bou2201/
 - Nguyen Minh Hieu (Back-End) - https://www.facebook.com/profile.php?id=100013345126847
@@ -23,20 +21,14 @@
 - Entity Framework Core
 
 ## Packages Installed
-- `<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.10" />`
-- `<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.10" />`
-- `<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>`
-- `<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.10" />`
-- `<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />`
-- `<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>`
-- `<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />`
-- `<PackageReference Include="Stripe.net" Version="40.13.0" />`
+- `Microsoft.AspNetCore.Identity.EntityFrameworkCore`
+- `Microsoft.AspNetCore.Identity.UI`
+- `Microsoft.EntityFrameworkCore.Design>`
+- `Microsoft.EntityFrameworkCore.Sqlite`
+- `Microsoft.EntityFrameworkCore.SqlServer`
+- `Microsoft.EntityFrameworkCore.Tools>`
+- `Microsoft.VisualStudio.Web.CodeGeneration.Design`
+- `Stripe.net`
   
 ## Documents
 - Slide: https://docs.google.com/presentation/d/1q5m0__rpxlJOOv24mdgkoxR2SXkG9_Ad/edit#slide=id.p1

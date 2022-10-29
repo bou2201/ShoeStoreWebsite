@@ -2,8 +2,6 @@
 
 > **Vickies.D Fashion** is the second term project of web application development course at **[VTC Academy](https://vtc.edu.vn/)**
 
-## [Demo Project](http://hoclaptrinhtheky21.tk/)
-
 ## Members
 - Nguyen Lam Chuc (Front-End) - https://www.facebook.com/bou2201/
 - Nguyen Minh Hieu (Back-End) - https://www.facebook.com/profile.php?id=100013345126847

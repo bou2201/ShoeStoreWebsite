@@ -1,0 +1,132 @@
+.background-admin {
+    background-color: #eee;
+    padding: 30px;
+}
+
+.avatar-admin {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.main-content-admin {
+    min-height: 100vh;
+
+    .navbar {
+        background: #fff;
+        border-radius: 10px;
+        padding: 0.5rem 1rem;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .bar-icon {
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        font-size: 18px;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 10px;
+        @include backgroundGradient;
+    }
+
+    .navbar-collapse {
+        flex-grow: unset;
+    }
+
+    .navbar-toggler {
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        font-size: 18px;
+        color: #fff !important;
+        padding: 13px 20px;
+        border-radius: 10px;
+        border-color: none !important;
+        @include backgroundGradient;
+
+        &:focus {
+            box-shadow: none;
+        }
+    }
+
+    .navbar-nav {
+        @include responsive(max_lg) {
+            margin-top: 10px;
+        }
+
+        .search-box {
+            position: relative;
+
+            a {
+                color: #121212;
+                text-decoration: none;
+                position: absolute;
+                right: 14px;
+                border-radius: 50%;
+                width: 35px;
+                height: 35px;
+                color: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.3s linear;
+                @include backgroundGradient;
+
+                &:hover {
+                    color: $third-color;
+                }
+            }
+
+            .form-control {
+                padding: 0.7rem 0.7rem 0.75rem 20px;
+                border-radius: 100rem;
+                display: inline-block;
+                width: auto;
+            }
+        }
+    }
+}
+
+.toStart {
+    margin-left: 0;
+}
+
+.toEnd {
+    margin-left: 330px;
+}
+
+.sidebarPosition {
+    position: static !important;
+}
+
+.admin-title {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    ion-icon {
+        font-size: 30px;
+        color: $third-color;
+        background-color: #fa62573e;
+        padding: 14px;
+        border-radius: 10px;
+        flex-shrink: 0;
+    }
+
+    &-content {
+        h5 {
+            margin-bottom: 0;
+            font-weight: 600;
+            @include textGradient;
+        }
+
+        span {
+            opacity: 0.65;
+        }
+    }
+}

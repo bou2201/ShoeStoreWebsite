@@ -1,0 +1,22 @@
+﻿@using ShoeStore.Ultitity
+@if (TempData[SD.Success] != null)
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        toastr.success('@TempData[SD.Success]')
+    </script>
+}
+@if (TempData[SD.Error] != null)
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        toastr.error('@TempData[SD.Error]')
+    </script>
+}
+@if (TempData[SD.Warning] != null)
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        toastr.warning('@TempData[SD.Warning]')
+    </script>
+}

@@ -1,0 +1,14 @@
+.list-group {
+    &-item.active {
+        @include backgroundGradient;
+        border-color: $third-color !important;
+    }
+}
+
+.order-table {
+    label {
+        display: none !important;
+        @include responsive(max_lg) {
+        }
+    }
+}

@@ -1,0 +1,128 @@
+﻿@model ShoeStore.Models.ShoeColor
+
+@{
+    ViewData["Title"] = "Shoe Color Details" + " ";
+    Layout = "_AdminLayout";
+}
+
+<div class="admin-title mt-4 mb-4">
+    <ion-icon name="settings-outline"></ion-icon>
+    <div class="admin-title-content">
+        <h5>Shoe Colors Management</h5>
+        <span>This dashboard is created to manage products and invoices</span>
+    </div>
+</div>
+<hr />
+<div class="container p-0">
+    <div class="">
+        <h3 class="title-option mb-4">Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input readonly="readonly" type="hidden" asp-for="Id" />
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label asp-for="FactoryPrice" class="form-label"></label>
+                <input readonly="readonly" asp-for="FactoryPrice" class="form-control" />
+                <span asp-validation-for="FactoryPrice" class="text-danger"></span>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="SalePrice" class="form-label"></label>
+                <input readonly="readonly" asp-for="SalePrice" class="form-control" />
+                <span asp-validation-for="SalePrice" class="text-danger"></span>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="SortOrder" class="form-label"></label>
+                <input readonly="readonly" asp-for="SortOrder" class="form-control" />
+                <span asp-validation-for="SortOrder" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="ShoeId" class="form-label">Shoe</label>
+                <select asp-for="ShoeId" class="form-select" asp-items="ViewBag.ShoeId" readonly></select>
+                <span asp-validation-for="ShoeId" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="ColorId" class="form-label">Color</label>
+                <select asp-for="ColorId" class="form-select" asp-items="ViewBag.ColorId"></select>
+                <span asp-validation-for="ColorId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input readonly="readonly" class="form-check-input" asp-for="Active" />
+                    @Html.DisplayNameFor(model => model.Active)
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="shoeImage mt-5">
+        <h3 class="title-option mb-4">Image</h3>
+        <div class="d-flex flex-column col-md-8 mx-auto">
+            <div class="carousel carousel-main" data-flickity='{"prevNextButtons": true, "pageDots": false}'>
+                @foreach (var image in @Model.Images?.OrderBy(e => e.SortOrder) ?? Enumerable.Empty<Image>())
+                {
+                    <div class="carousel-cell" data-id="@image.Id">
+                        <img src="@image.Path" data-id="@image.Id" alt="thumbnail-small" />
+                    </div>
+                }
+            </div>
+            <div class="carousel carousel-nav"
+                data-flickity='{ "asNavFor": ".carousel-main", "contain": true, "pageDots": false, "prevNextButtons": false }'>
+                @foreach (var image in @Model.Images?.OrderBy(e => e.SortOrder) ?? Enumerable.Empty<Image>())
+                {
+                    <div class="carousel-cell thumbnail-small " data-id="@image.Id" data-sortOrder="@image.SortOrder">
+                        <img src="@image.Path" data-id="@image.Id" class="img-fluid" alt="thumbnail-small" />
+                        <div class="screen-blur"></div>
+                        <div class="sort-options">
+                            <div class="delete">
+                                <i class="fa-solid fa-trash"></i>
+                            </div>
+                            <div class="sort-order">
+                                <select name="SortOrder"></select>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 mt-5">
+        <h3 class="title-option mb-4">Size List</h3>
+        @* <select class="form-select" asp-items="ViewBag.SizeId"></select> *@
+        <div class="table-responsive size-list text-right">
+            <table class="table table-bordered table-striped align-middle">
+                <thead class="">
+                    <tr>
+                        <th>Size</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var shoeSize in Model?.ShoeSizes?.OrderBy(e => e?.Size?.Value).ToList() ??
+                    Enumerable.Empty<ShoeSize>())
+                    {
+                        <tr data-id="@shoeSize.Id">
+                            <td class="col-auto">@shoeSize?.Size?.Value</td>
+                            <td class="col-auto">@shoeSize?.Quantity</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<div class="d-flex justify-content-center align-items-center gap-4">
+    @* <button id="add-size" class="btn-save" data-bs-toggle="modal" data-bs-target="#modal-size-quantity"> *@
+    @*     Add Size *@
+    @* </button> *@
+    <a asp-controller="Shoe" asp-action="Edit" asp-route-id="@Model?.ShoeId" class="btn-back">
+        Back to Shoe Edit Page
+    </a>
+</div>
+
+

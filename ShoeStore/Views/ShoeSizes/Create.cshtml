@@ -1,0 +1,39 @@
+﻿@model ShoeStore.Models.ShoeSize
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_AdminLayout";
+}
+
+<h1>Create</h1>
+
+<h4>ShoeSize</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="form-label"></label>
+                <input asp-for="Quantity" class="form-control" value="@(new Random().Next(0, 200))" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShoeColorId" class="form-label">ShoeColor</label>
+                <select asp-for="ShoeColorId" class ="form-select" asp-items="ViewBag.ShoeColorid"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SizeId" class="form-label">Size</label>
+                <select asp-for="SizeId" class ="form-select" asp-items="ViewBag.SizeId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>
+

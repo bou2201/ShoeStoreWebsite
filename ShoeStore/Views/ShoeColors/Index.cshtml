@@ -1,0 +1,95 @@
+﻿@model IEnumerable<ShoeColor>
+
+@{
+    ViewData["Title"] = "Shoe Color" + " ";
+    Layout = "_AdminLayout";
+}
+
+<div class="admin-title mt-4 mb-4">
+    <ion-icon name="settings-outline"></ion-icon>
+    <div class="admin-title-content">
+        <h5>Shoe Colors Management</h5>
+        <span>This dashboard is created to manage products and invoices</span>
+    </div>
+</div>
+
+<p class="text-center">
+    @* <a asp-action="Create" class="btn btn-outline-primary">Create New <i class="fa-solid fa-circle-plus"></i></a> *@
+</p>
+<table id="table_id" class="display cell-border">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Shoe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Color)
+        </th>
+        @* <th> *@
+        @*     @Html.DisplayNameFor(model => model.FactoryPrice) *@
+        @* </th> *@
+        <th>
+            @Html.DisplayNameFor(model => model.SalePrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SortOrder)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Shoe.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color.Name)
+                    </td>
+                    @* <td> *@
+                    @*     @Html.DisplayFor(modelItem => item.FactoryPrice) *@
+                    @* </td> *@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SalePrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SortOrder)
+                    </td>
+                    @* <td> *@
+                    @*     @Html.DisplayFor(modelItem => item.Active) *@
+                    @* </td> *@
+                    @* <td data-order="@item.Created.ToBinary()"> *@
+                    @*     @item.Created *@
+                    @* </td> *@
+                    @* <td data-order="@item.Created.ToBinary()"> *@
+                    @*     @Html.DisplayFor(modelItem => item.Edited) *@
+                    @* </td> *@
+                    <td class="dt-nowrap">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-option" role="button "data-bs-toggle="tooltip"
+                                data-bs-placement="bottom" title="Edit">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn-option" role="button" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom" title="Details">
+                                <i class="fa-solid fa-circle-info"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn-option" role="button" data-bs-toggle="tooltip"
+                                data-bs-placement="bottom" title="Detele">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script src="js/EnableDataTable.js"></script>
+}

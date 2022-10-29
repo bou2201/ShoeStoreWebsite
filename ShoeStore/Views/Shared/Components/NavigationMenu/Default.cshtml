@@ -1,0 +1,168 @@
+﻿<div id="sidebar" class="collapse collapse-horizontal show">
+    <div id="sidebar-nav">
+        <div class="sidebar-header">
+            <a asp-controller="Admin" asp-action="Index">
+                <img src='@Url.Content("~/images/logo/logo.png")' class="admin-logo" alt=""
+                     asp-append-version="true">
+            </a>
+        </div>
+        <div class="sidebar-content mb-4">
+            <div class="sidebar-content-inner">
+                <h5><i class="fa-solid fa-ellipsis"></i>Menu</h5>
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
+                                    aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                                Dashboard
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li>
+                                        <a href="#">Analytics</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Commerce</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Sales</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Minimal</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">CRM</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo"
+                                    aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                Pages
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingTwo">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li>
+                                        <a href="#">Sign in</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Sign up</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Forgot Password</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree"
+                                    aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                                Applications
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingThree">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li>
+                                        <a href="#">Mailbox</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Chat</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">FAQ Section</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Forum</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-content-inner">
+                <h5><i class="fa-solid fa-pen"></i>Option</h5>
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive"
+                                    aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+                                Invoice
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse"
+                             aria-labelledby="panelsStayOpen-headingFive">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li>
+                                        <a href="#">Transaction History</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">List Customer</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="true"
+                                    aria-controls="panelsStayOpen-collapseFour">
+                                Products
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse show"
+                             aria-labelledby="panelsStayOpen-headingFour">
+                            <div class="accordion-body">
+                                <ul>
+                                    <li>
+                                        <a asp-controller="Order" asp-action="Index">Order</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Brand" asp-action="Index">Brand</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Shoe" asp-action="Index">Shoe</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="ShoeColors" asp-action="Index">Shoe Colors</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Categories" asp-action="Index">Categories</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Color" asp-action="Index">Color</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Size" asp-action="Index">Size</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

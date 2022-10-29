@@ -1,0 +1,115 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@model ShoeStore.Models.ViewModels.DashBoardViewModel
+
+<div class="admin-title mt-4 mb-4">
+    <ion-icon name="settings-outline"></ion-icon>
+    <div class="admin-title-content">
+        <h5>Admin Dashboard</h5>
+        <span>This dashboard is created to manage products and invoices</span>
+    </div>
+</div>
+<div class="container p-0">
+    <div class="row">
+        <div class="col-12">
+            <div class="revenue">
+                <div class="revenue-card">
+                    <div class="revenue-card-top">
+                        <h5>Orders</h5>
+                        <span>Today</span>
+                    </div>
+                    <div class="revenue-card-bottom">
+                        <h3>@Model.OrderTotalsToday.ToString("C")</h3>
+                        <p>100%</p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100"
+                                aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="revenue-card">
+                    <div class="revenue-card-top">
+                        <h5>Orders</h5>
+                        <span>This week</span>
+                    </div>
+                    <div class="revenue-card-bottom">
+                        <h3>@Model.OrderTotalsThisWeek.ToString("C")</h3>
+                        <p>100%</p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100"
+                                aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="revenue-card">
+                    <div class="revenue-card-top">
+                        <h5>Orders</h5>
+                        <span>This month</span>
+                    </div>
+                    <div class="revenue-card-bottom">
+                        <h3>@Model.OrderTotalsThisMonth.ToString("C")</h3>
+                        <p>100%</p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100"
+                                aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="revenue-card">
+                    <div class="revenue-card-top">
+                        <h5>Orders</h5>
+                        <span>This year</span>
+                    </div>
+                    <div class="revenue-card-bottom">
+                        <h3>@Model.OrderTotalsThisYear.ToString("C")</h3>
+                        <p>100%</p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100"
+                                aria-valuemin="0" aria-valuemax="100">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="visit-place container p-0">
+    <div class="d-flex justify-content-start gap-5">
+        <div class="col-md-7 visit-place-map">
+            <h3 class="title-option mb-4">Visit the place</h3>
+            <div class="visit-place-map-frame">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.944299322485!2d105.85971361501225!3d20.99486978601681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ad11b1f441bf%3A0xcf480c26f8137a3a!2sVTC%20Online%20Building!5e0!3m2!1svi!2s!4v1665294543756!5m2!1svi!2s"
+                    style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+        <div class="col-md-4 total-order">
+            <h3 class="title-option mb-4">Total Orders</h3>
+            <div class="total-order-top">
+                <div class="total-order-top-box">
+                    <span>Today</span>
+                    <p>@Model.TotalOrdersToday</p>
+                    <i class="fa-solid fa-circle"></i>
+                </div>
+                <div class="total-order-top-box">
+                    <span>This week</span>
+                    <p>@Model.TotalOrdersThisWeek</p>
+                    <i class="fa-solid fa-circle"></i>
+                </div>
+                <div class="total-order-top-box">
+                    <span>This month</span>
+                    <p>@Model.TotalOrdersThisMonth</p>
+                    <i class="fa-solid fa-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - vickies.D</title>
+    @* Chuc start*@
+    <link rel="shortcut icon" href="~/images/logo/logo-web.png" type="image/x-icon">
+    @* Optinal Links *@
+    <link rel="stylesheet" href="~/css/app.css" asp-append-version="true" />
+    @* Poppins & Raleway Fonts *@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Raleway:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    @* Flickity *@
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    @* AOS JS *@
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    @* Chuc end*@
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/UserDefine.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header class="sticky-top header shadow-sm">
+        <nav class="navbar navbar-expand-lg bg-white">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src='@Url.Content("~/images/logo/logo.png")' class="header-logo" alt=""
+                        asp-append-version="true" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <ion-icon name="menu" size="large"></ion-icon>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link hover-underline-animation active" asp-area="" asp-controller="Admin"
+                                asp-action="Index">Admin</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link hover-underline-animation active" asp-area="" asp-controller="Home"
+                                asp-action="Index">Home</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link hover-underline-animation" asp-area="" asp-controller="Products"
+                                asp-action="Index" role="button" aria-expanded="false">
+                                Brand
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item">
+                                    <a class="dropdown-item" asp-controller="Products" asp-action="Index">
+                                        All Brands
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index"
+                                        asp-route-brand="New Balance">
+                                        New Balance
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index"
+                                        asp-route-brand="Nike">
+                                        Nike
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index"
+                                        asp-route-brand="Saucony">
+                                        Saucony
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index"
+                                        asp-route-brand="Asics">
+                                        Asics
+                                    </a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index"
+                                        asp-route-brand="Brooks">
+                                        Brooks
+                                    </a>
+                                </li>
+                                @* <li> *@
+                                @* <hr class="dropdown-divider"> *@
+                                @* </li> *@
+                            </ul>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link hover-underline-animation">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="d-flex align-items-center ">
+                        <div class="header-search">
+                            <form method="get" asp-controller="Products" asp-action="Index">
+                                <button class="header-search-btn" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <input type="text" name="productName" class="header-search-input"
+                                    placeholder="Search...">
+                            </form>
+                        </div>
+                        <div class="header-account">
+                            <div class="dropdown">
+                                <a class="btn" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                                    <i class="fas fa-user"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <partial name="_LoginPartial" />
+                                </ul>
+                            </div>
+                        </div>
+                        <vc:cart-button />
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid p-0">
+        <main role="main">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-6">
+                    <div class="single_footer">
+                        <h4>About</h4>
+                        <ul>
+                            <li>
+                                <a href="#">Contact</a>
+                            </li>
+                            <li>
+                                <a href="#">Our Team</a>
+                            </li>
+                            <li>
+                                <a href="#">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="#">Policy</a>
+                            </li>
+                            <li>
+                                <a href="#">Career</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6 col-6">
+                    <div class="single_footer single_footer_address">
+                        <h4>Shop</h4>
+                        <ul>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index">
+                                    All Brands
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index"
+                                    asp-route-brand="New Balance">
+                                    New Balance
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index"
+                                    asp-route-brand="Nike">
+                                    Nike
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index"
+                                    asp-route-brand="Saucony">
+                                    Saucony
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index"
+                                    asp-route-brand="Asics">
+                                    Asics
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="Index"
+                                    asp-route-brand="Brooks">
+                                    Brooks
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-12">
+                    <div class="single_footer">
+                        <h4>Subscribe Us</h4>
+                        <div class="signup_form">
+                            <div class="subscribe">
+                                <input type="text" class="subscribe__input" placeholder="Type Email Address">
+                                <button type="button" class="subscribe__btn">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social_profile">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fab fa-google-plus-g"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    @* Back To Top Button *@
+    <div class="back-to-top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </div>
+
+    @* Flickity *@
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    @* Ionicons *@
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    @* AOS JS *@
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            mirror: false
+        });
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/filter.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

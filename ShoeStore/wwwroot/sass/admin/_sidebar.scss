@@ -1,0 +1,136 @@
+.admin-logo {
+    width: 100px;
+    height: auto;
+}
+
+#sidebar-nav {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-right: 30px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: linear-gradient(to bottom, $third-color, $fourth-color);
+        border-radius: 50px;
+        border: 3px solid rgba(249, 136, 108, 0.5);
+        background-clip: content-box;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: rgba(249, 136, 108, 0.5);
+        border-radius: 50px;
+    }
+
+    .sidebar-header {
+        padding: 1.5rem;
+        border-bottom: rgba(0, 0, 0, .08) solid 1px;
+    }
+
+    .sidebar-content {
+        padding: 0 25px;
+
+        &-inner {
+            h5 {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 10px;
+                font-size: 16px;
+                font-weight: bold;
+                margin: 25px 0 10px 0;
+                @include textGradient;
+            }
+
+            .accordion {
+                &-item {
+                    border: none;
+                }
+
+                &-button {
+                    padding: 0.6rem 0;
+
+                    &:focus {
+                        border-color: none;
+                        outline: 0;
+                        box-shadow: none;
+                    }
+
+                    &::after {
+                        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23121212'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+                    }
+
+                    &:not(.collapsed) {
+                        color: $third-color;
+                        background-color: transparent !important;
+                        box-shadow: none;
+                        font-weight: 600;
+                    }
+
+                    &:not(.collapsed)::after {
+                        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23f9886c'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+                    }
+                }
+
+                &-body {
+                    padding: 0;
+
+                    ul {
+                        position: relative;
+                        margin-bottom: 0;
+
+                        li {
+                            list-style: none;
+
+                            a {
+                                text-decoration: none;
+                                color: #121212;
+                                transition: all 0.25s linear;
+                                font-size: 15px;
+                                padding: 10px;
+                                padding-left: 20px;
+                                transition: all 0.3s linear;
+                                border-radius: 0 100rem 100rem 0;
+                                display: block;
+
+                                &:hover {
+                                    color: #fff;
+                                    @include backgroundGradient;
+                                }
+
+                                &.is-active {
+                                    color: #fff;
+                                    @include backgroundGradient;
+                                    pointer-events: none;
+                                }
+                            }
+                        }
+
+                        &::before {
+                            content: '';
+                            height: 100%;
+                            opacity: 1;
+                            width: 3px;
+                            @include backgroundGradient;
+                            position: absolute;
+                            left: 20px;
+                            top: 0;
+                            border-radius: 15px;
+                            opacity: 0.55;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

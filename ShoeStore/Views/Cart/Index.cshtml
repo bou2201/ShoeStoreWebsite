@@ -1,0 +1,104 @@
+﻿@using ShoeStore.Models.ViewModels
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ShoeStore.Models.ViewModels.CartViewModel
+@{
+    ViewData["Title"] = "Shopping Cart Page";
+}
+
+<section class="cart mt-lg-5 mt-4 mb-5">
+    <div class="container">
+        <div class="cart-background">
+            <div class="cart-background-overlay"></div>
+            <div class="cart-shopping mb-4">
+                <h2>
+                    <strong>Shopping Cart</strong>
+                </h2>
+                <h5>@Model.ProductCartsList.Count items</h5>
+            </div>
+            <form method="post">
+                <input type="hidden" name="returnUrl" value="@Model?.ReturnUrl">
+                @foreach (var productCart in Model?.ProductCartsList ?? Enumerable.Empty<ProductCartViewModel>())
+                {
+                    <div class="cart-item">
+                        <div class="cart-item-name">
+                            <div class="cart-item-image">
+                                <img src='@Url.Content(productCart.ImgPath)' alt="">
+                            </div>
+                            <div class="cart-item-detail">
+                                <p>
+                                    <a class="text-decoration-none text-white"
+                                       asp-controller="Products" asp-action="Detail" asp-route-url="@productCart.ProductUrl">
+                                        @productCart.ProductName
+                                    </a>
+                                </p>
+
+                                <p class="fs-6 fst-italic">Size: @productCart.Size</p>
+
+                                <a class="text-decoration-none text-white"
+                                   asp-controller="Products" asp-action="Index" asp-route-brand="@productCart.BrandName">
+                                    <span>@productCart.BrandName</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="cart-item-price">
+                            <h5>$@productCart.Price</h5>
+                        </div>
+                        <div class="cart-item-quantity">
+
+                            <button class="btn btn-quantity px-2" asp-action="Decrement" name="shoeSizeId" value="@productCart.ShoeSizeId">
+                                <i class="fas fa-minus"></i>
+                            </button>
+
+                            <input id="form1" readonly="readonly" min="1" name="quantity" value="@productCart.Quantity" type="number"
+                                   class="no-arrow form-control form-control-sm" style="width: 20%;"
+                                   form="update-cart"/>
+
+                            <button class="btn btn-quantity px-2" asp-action="Increment" name="shoeSizeId" value="@productCart.ShoeSizeId">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="cart-item-remove">
+                            <button type="submit" style="display: contents" asp-action="Remove" name="shoeSizeId" value="@productCart.ShoeSizeId">
+                                <i class="fa-solid fa-trash "></i>
+                            </button>
+                        </div>
+                    </div>
+                    <hr>
+                }
+            </form>
+
+            <div class="cart-back mt-4">
+                <a href="@Model?.ReturnUrl">
+                    <i class="fa-solid fa-left-long"></i>
+                    <p>Continue shopping</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="checkout mt-5 mb-5">
+    <div class="container">
+        <div class="checkout-form">
+            <div class="checkout-form-right">
+                <div class="cart-background">
+                    <div class="cart-background-overlay"></div>
+                    <h3>
+                        <strong>Order Summary</strong>
+                    </h3>
+                    <span>Shipping and additional costs are calculated based on values you have entered.</span>
+                    <div class="checkout-summary">
+                        <div class="d-flex justify-content-between align-items-center py-4 border-bottom">
+                            <strong class="text-muted">Total</strong>
+                            <h5>
+                                <strong>@Model.ShopOrder.OrderTotal.ToString("C")</strong>
+                            </h5>
+                        </div>
+                    </div>
+                    <a asp-action="Summary" asp-route-returnUrl="@Model?.ReturnUrl" class="btn btn-proceed" type="button">Summary</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

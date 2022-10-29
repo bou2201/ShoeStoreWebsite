@@ -1,0 +1,355 @@
+@using ShoeStore.Ultitity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model ShoeStore.Models.ViewModels.ProductDetailViewModel
+
+@{
+    ViewData["Title"] = "Product Detail Page";
+    
+    bool isUser = User.Identity.IsAuthenticated;
+}
+
+<section class="detail container mt-lg-5 mt-4">
+    <div class="detail-slider">
+        <div class="carousel carousel-main" data-flickity='{ "pageDots": false, "fullscreen": true }'>
+            @foreach (var img in Model?.ShoeImages ?? Enumerable.Empty<Image>())
+            {
+                <div class="carousel-cell">
+                    <img src="@img.Path" alt="">
+                </div>
+            }
+        </div>
+
+        <div class="carousel carousel-nav" data-flickity='{ 
+                "asNavFor": ".carousel-main", 
+                "contain": true, 
+                "prevNextButtons": false, 
+                "pageDots": false 
+            }'>
+            @foreach (var img in Model?.ShoeImages ?? Enumerable.Empty<Image>())
+            {
+                <div class="carousel-cell">
+                    <img src="@img.Path" alt="">
+                </div>
+            }
+        </div>
+    </div>
+    <div class="detail-info">
+        <h2><strong>@Model.Shoe.Name</strong></h2>
+        <div class="detail-info-name">
+            <ul>
+                <li><i class="fa-solid fa-star"></i></li>
+                <li><i class="fa-solid fa-star"></i></li>
+                <li><i class="fa-solid fa-star"></i></li>
+                <li><i class="fa-solid fa-star"></i></li>
+                <li><i class="fa-solid fa-star"></i></li>
+                <li><a href="#">Rating for product</a></li>
+            </ul>
+            <div class="d-flex justify-content-between">
+                <p>Brand: <a class="link-dark text-decoration-none" asp-controller="Products" asp-action="Index"
+                        asp-route-brand="@Model.Shoe.Brand.Name">
+                        <strong>@Model.Shoe.Brand.Name</strong>
+                    </a></p>
+                <p>Code: <strong>@Model.ShoeColor.ProductCode</strong></p>
+            </div>
+        </div>
+        <div class="detail-info-price">
+            <h4>Price:</h4>
+            <h2><strong>$@Model.ShoeColor.SalePrice</strong></h2>
+        </div>
+        <div class="detail-info-size mt-3">
+            <h4>Size:</h4>
+            <div asp-validation-summary="All"></div>
+            <div class="d-flex align-items-baseline flex-wrap mt-3">
+                @foreach (var size in Model?.ShoeSizes ?? Enumerable.Empty<ShoeSize>())
+                {
+                    @if (size.Quantity > 0)
+                    {
+                        <input form="add-to-cart" type="radio" id="@($"size-{size.Size.Value}")" class="radio-input" name="ShoeSizeId" value="@size.Id"/>
+                        <label for="@($"size-{size.Size.Value}")" class="radio-label">@size.Size.Value</label>
+                    }
+                }
+
+            </div>
+        </div>
+        <div class="detail-info-color mt-4">
+            <h4>Color:</h4>
+            <div class="d-flex justify-content-start align-items-center flex-wrap gap-3 mt-3">
+
+                @for (var i = 0; i < Model.RelatedShoeColors.Count; i++)
+                {
+                    var productColor = Model.RelatedShoeColors[i];
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="productColor" id="@($"productColor-{i}")"
+                        @(productColor.Id == Model.ShoeColor.Id ? "Checked": "")>
+                        <label class="form-check-label" for="@($"productColor-{i}")">
+                            <a asp-controller="Products" asp-action="Detail" asp-route-url="@productColor.Url">
+                                <img src='@productColor.Images?.First().Path' alt="">
+                            </a>
+                        </label>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="detail-info-quantity mt-4">
+            <h4>Quantity:</h4>
+            <div class="box-quantity mt-3">
+                <button class="btn btn-quantity px-2"
+                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                    <i class="fas fa-minus"></i>
+                </button>
+
+                <input form="add-to-cart" id="form1" min="1" max="999" name="Count" value="1" type="number" class="form-control form-control-sm"
+                    style="width: 15%;" />
+
+                <button class="btn btn-quantity px-2"
+                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+        </div>
+        @* <form id="add-to-cart" asp-page="/Cart" asp-page-handler="Post" method="post"> *@
+        <form id="add-to-cart" method="post">
+            <input type="hidden" asp-for="ShoeColor!.Url" name="productUrl">
+            @* <input type="hidden" name="productId" value="@Model.ShoeColor.Id"> *@
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()">
+            <div class="detail-info-add mt-5">
+                @if (isUser)
+                {
+                    <button type="submit" class="btn-add" asp-action="AddToCart">
+                        Add to Cart
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </button>
+                }
+                else
+                {
+                    <button type="submit" class="btn-add" asp-action="AddToCartSession">
+                        Add to Cart
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </button>
+                }
+                <button type="button" class="btn-add">
+                    <i class="fa-solid fa-heart"></i>
+                </button>
+            </div>
+        </form>
+        <div class="detail-info-more mt-5">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne1" aria-expanded="false"
+                            aria-controls="flush-collapseOne1">
+                            Descriptions
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne1" class="accordion-collapse collapse" aria-labelledby="flush-headingOne2"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p>
+                            <div class="mb-3">
+                                    @Html.Raw(@Model.Shoe.Features)
+                            </div>
+                                @Html.Raw(Model.Shoe.Description)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo2" aria-expanded="false"
+                            aria-controls="flush-collapseTwo2">
+                            Comments
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo2" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo2"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <h4>Recent comments</h4>
+                            <p>Latest comments section by users</p>
+                            <div class="card-comment mt-3">
+                                <div class="card-comment-avatar">
+                                    <img src='@Url.Content("~/images/logo/avatar-comments1.png")' alt="">
+                                </div>
+                                <div class="card-comment-content">
+                                    <h5>Johnny Dark</h5>
+                                    <p>3 hours ago</p>
+                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quia
+                                        explicabo sunt,
+                                        atque ducimus deserunt nam. Explicabo cum laboriosam voluptates et doloremque
+                                        quae eius
+                                        distinctio aspernatur!</span>
+                                    <div class="card-comment-content-icon mt-4">
+                                        <div class="card-comment-content-icon-left">
+                                            <button><i class="fa-solid fa-thumbs-up"></i>34</button>
+                                            <button><i class="fa-solid fa-thumbs-down"></i>12</button>
+                                        </div>
+                                        <div class="card-comment-content-con-right">
+                                            <button><i class="fas fa-reply me-1"></i>Reply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="card-comment">
+                                <div class="card-comment-avatar">
+                                    <img src='@Url.Content("~/images/logo/avatar-comments2.png")' alt="">
+                                </div>
+                                <div class="card-comment-content">
+                                    <h5>Bodoi</h5>
+                                    <p>10 hours ago</p>
+                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quia
+                                        explicabo sunt,
+                                        atque ducimus deserunt nam. Explicabo cum laboriosam voluptates et doloremque
+                                        quae eius
+                                        distinctio aspernatur!</span>
+                                    <div class="card-comment-content-icon mt-4">
+                                        <div class="card-comment-content-icon-left">
+                                            <button><i class="fa-solid fa-thumbs-up"></i>19</button>
+                                            <button><i class="fa-solid fa-thumbs-down"></i></button>
+                                        </div>
+                                        <div class="card-comment-content-con-right">
+                                            <button><i class="fas fa-reply me-1"></i>Reply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="card-comment">
+                                <div class="card-comment-avatar">
+                                    <img src='@Url.Content("~/images/logo/avatar-comments3.png")' alt="">
+                                </div>
+                                <div class="card-comment-content">
+                                    <h5>Mindy Luger</h5>
+                                    <p>1 days ago</p>
+                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quia
+                                        explicabo sunt,
+                                        atque ducimus deserunt nam. Explicabo cum laboriosam voluptates et doloremque
+                                        quae eius
+                                        distinctio aspernatur!</span>
+                                    <div class="card-comment-content-icon mt-4">
+                                        <div class="card-comment-content-icon-left">
+                                            <button><i class="fa-solid fa-thumbs-up"></i>52</button>
+                                            <button><i class="fa-solid fa-thumbs-down"></i>11</button>
+                                        </div>
+                                        <div class="card-comment-content-con-right">
+                                            <button><i class="fas fa-reply me-1"></i>Reply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="card-comment">
+                                <div class="card-comment-avatar">
+                                    <img src='@Url.Content("~/images/logo/avatar-comments4.png")' alt="">
+                                </div>
+                                <div class="card-comment-content">
+                                    <h5>Hanna</h5>
+                                    <p>1 days ago</p>
+                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quia
+                                        explicabo sunt,
+                                        atque ducimus deserunt nam. Explicabo cum laboriosam voluptates et doloremque
+                                        quae eius
+                                        distinctio aspernatur!</span>
+                                    <div class="card-comment-content-icon mt-4">
+                                        <div class="card-comment-content-icon-left">
+                                            <button><i class="fa-solid fa-thumbs-up"></i>12</button>
+                                            <button><i class="fa-solid fa-thumbs-down"></i>1</button>
+                                        </div>
+                                        <div class="card-comment-content-con-right">
+                                            <button><i class="fas fa-reply me-1"></i>Reply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn-add-comment" data-bs-toggle="modal"
+                                data-bs-target="#model-upload-image">
+                                + Add Comment
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="model-upload-image" tabindex="-1"
+                                aria-labelledby="model-upload-imageLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="model-upload-imageLabel"><strong>Leave a
+                                                    comment</strong></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="row g-3 mb-3">
+                                                <div class="col-md-6">
+                                                    <label for="inputEmail" class="form-label">Email</label>
+                                                    <input type="text" class="form-control" id="inputEmail">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="inputName" class="form-label">Name</label>
+                                                    <input type="text" class="form-control" id="inputName">
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-floating">
+                                                        <textarea class="form-control"
+                                                            placeholder="Leave a comment here" id="floatingTextarea2"
+                                                            style="height: 100px"></textarea>
+                                                        <label for="floatingTextarea2">Comments</label>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn-add-comment">Comment</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="related mt-lg-5 mt-3 mb-5">
+    <div class="container">
+        <h3 class="mb-4" data-aos="zoom-in-right">
+            <strong>Related Product</strong>
+        </h3>
+        <div class="product mt-4" data-aos="zoom-in">
+
+            @foreach (var product in Model?.RelatedProduct ?? Enumerable.Empty<ShoeColor>())
+            {
+                <div class="product-card">
+                    <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                        <div class="product-card-image">
+                            <img src='@Url.Content(product?.Images?.First().Path)' alt="">
+                        </div>
+                    </a>
+                    <div class="product-card-top">
+                        <span>@product.Shoe?.Brand?.Name</span>
+                        <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                            <h5>@product.Shoe?.Name</h5>
+                        </a>
+                    </div>
+                    <div class="product-card-bottom">
+                        <h5>
+                            <strong>$@product.SalePrice</strong>
+                        </h5>
+                        <div>
+                            <a href="">
+                                <i class="fa-solid fa-heart"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

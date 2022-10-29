@@ -1,0 +1,374 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model ShoeStore.Models.ViewModels.HomeViewModel
+
+<section class="hero">
+    <div class="hero-image">
+        <div class="hero-overlay">
+            <div class="hero-content container">
+                <h4>Choose your style</h4>
+                <h1>Welcome to <strong>vickies.D &nbsp;</strong></h1>
+                <span>Find out more style with us, you will have super</span>
+                <span>deals on all product</span>
+                <button>
+                    <a asp-controller="Products" asp-action="Index" class="text-decoration-none text-white">
+                        Shop now
+                    </a>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="featured mt-5">
+    <div class="container">
+        <h3 class="mb-4" data-aos="zoom-in-right">
+            <strong>Featured Product</strong>
+        </h3>
+        <div class="product mt-4">
+
+            @for (var i = 0; i < Model.FeatureProducts.Count; i++)
+            {
+                var product = Model.FeatureProducts[i];
+                int dataAosDelay = 200 + i * 100;
+                <div class="product-card" data-aos="zoom-in" data-aos-delay="@dataAosDelay">
+                    <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                        <div class="product-card-image">
+                            <img src='@Url.Content(product.Images.First().Path)' alt="">
+                        </div>
+                    </a>
+                    <div class="product-card-top">
+                        <span>@product.Shoe.Brand.Name</span>
+                        <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                            <h5>@product.Shoe.Name</h5>
+                        </a>
+                    </div>
+                    <div class="product-card-bottom">
+                        <h5>
+                            <strong>$@product.SalePrice</strong>
+                        </h5>
+                        <div>
+                            <a href="">
+                                <i class="fa-solid fa-heart"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>
+
+<section class="nike mt-5">
+    <div class="container">
+        <h3 class="mb-4" data-aos="zoom-in-right">
+            <strong>Nike</strong>
+        </h3>
+        @* <div class="category mt-4"> *@
+        @*     <button>Air Force 1</button> *@
+        @*     <button>Jordan</button> *@
+        @* </div> *@
+        <div class="product mt-4">
+
+            @for (var i = 0; i < Model.NikeProducts.Count; i++)
+            {
+                var product = Model.NikeProducts[i];
+                int dataAosDelay = 200 + i * 100;
+                <div class="product-card" data-aos="fade-up" data-aos-delay="@dataAosDelay">
+                    <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                        <div class="product-card-image">
+                            <img src='@Url.Content(product?.Images.First().Path)' alt="">
+                        </div>
+                    </a>
+                    <div class="product-card-top">
+                        <span>@product.Shoe.Brand.Name</span>
+                        <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                            <h5>@product.Shoe.Name</h5>
+                        </a>
+                    </div>
+                    <div class="product-card-bottom">
+                        <h5>
+                            <strong>$@product.SalePrice</strong>
+                        </h5>
+                        <div>
+                            <a href="">
+                                <i class="fa-solid fa-heart"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="view-more mt-4">
+            <button>View all products for Nike</button>
+            <a asp-controller="Products" asp-action="Index" asp-route-brand="Nike"></a>
+        </div>
+    </div>
+</section>
+
+<section class="mlb mt-5">
+    <div class="container">
+        <h3 class="mb-4" data-aos="zoom-in-right">
+            <strong>New Balance</strong>
+        </h3>
+        <div class="product mt-4" data-aos="zoom-in">
+
+            @for (var i = 0; i < Model.NewBalanceProducts.Count; i++)
+            {
+                var product = Model.NewBalanceProducts[i];
+                int dataAosDelay = 200 + i * 100;
+                <div class="product-card" data-aos="fade-up" data-aos-delay="@dataAosDelay">
+                    <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                        <div class="product-card-image">
+                            <img src='@Url.Content(product.Images.First().Path)' alt="">
+                        </div>
+                    </a>
+                    <div class="product-card-top">
+                        <span>@product.Shoe.Brand.Name</span>
+                        <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                            <h5>@product.Shoe.Name</h5>
+                        </a>
+                    </div>
+                    <div class="product-card-bottom">
+                        <h5>
+                            <strong>$@product.SalePrice</strong>
+                        </h5>
+                        <div>
+                            <a href="">
+                                <i class="fa-solid fa-heart"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="view-more mt-4">
+            <button>View all products for New Balance</button>
+            <a asp-controller="Products" asp-action="Index" asp-route-brand="New Balance"></a>
+        </div>
+    </div>
+</section>
+
+<section class="vans mt-5">
+    <div class="container">
+        <h3 class="mb-4" data-aos="zoom-in-right">
+            <strong>Asics</strong>
+        </h3>
+        <div class="product mt-4" data-aos="fade-up">
+
+            @for (var i = 0; i < Model.AsicsProducts.Count; i++)
+            {
+                var product = Model.AsicsProducts[i];
+                int dataAosDelay = 200 + i * 100;
+                <div class="product-card" data-aos="fade-up" data-aos-delay="@dataAosDelay">
+                    <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                        <div class="product-card-image">
+                            <img src='@Url.Content(product.Images.First().Path)' alt="">
+                        </div>
+                    </a>
+                    <div class="product-card-top">
+                        <span>@product.Shoe.Brand.Name</span>
+                        <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url" role="button"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="@product.Shoe.Name">
+                            <h5>@product.Shoe.Name</h5>
+                        </a>
+                    </div>
+                    <div class="product-card-bottom">
+                        <h5>
+                            <strong>$@product.SalePrice</strong>
+                        </h5>
+                        <div>
+                            <a href="">
+                                <i class="fa-solid fa-heart"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="view-more mt-4">
+            <button>View all products for Asics</button>
+            <a asp-controller="Products" asp-action="Index" asp-route-brand="Asics"></a>
+        </div>
+    </div>
+</section>
+
+<section class="oxford mt-5">
+    <div class="container">
+        <h3 class="mb-4" data-aos="zoom-in-right">
+            <strong>Saucony</strong>
+        </h3>
+        <div class="product mt-4" data-aos="zoom-in">
+
+            @for (var i = 0; i < Model.SauconyProducts.Count; i++)
+            {
+                var product = Model.SauconyProducts[i];
+                int dataAosDelay = 200 + i * 100;
+                <div class="product-card" data-aos="fade-up" data-aos-delay="@dataAosDelay">
+                    <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                        <div class="product-card-image">
+                            <img src='@Url.Content(product.Images.First().Path)' alt="">
+                        </div>
+                    </a>
+                    <div class="product-card-top">
+                        <span>@product.Shoe.Brand.Name</span>
+                        <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                            <h5>@product.Shoe.Name</h5>
+                        </a>
+                    </div>
+                    <div class="product-card-bottom">
+                        <h5>
+                            <strong>$@product.SalePrice</strong>
+                        </h5>
+                        <div>
+                            <a href="">
+                                <i class="fa-solid fa-heart"></i>
+                            </a>
+                            <a href="">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="view-more mt-4">
+            <button>View all products for Saucony</button>
+            <a asp-controller="Products" asp-action="Index" asp-route-brand="Saucony"></a>
+        </div>
+    </div>
+</section>
+
+<section class="reason mt-5">
+    <div class="row">
+        <div class="reason-banner col-lg-6 col-md-12" data-aos="fade-up">
+            <img src='@Url.Content("~/images/banner/banner4.png")' alt="">
+        </div>
+        <div class="reason-content col-lg-6 col-md-12" data-aos="fade-up" data-aos-delay="500">
+            <h1>Reason why choose <strong>vickies.D &nbsp;</strong></h1>
+            <div class="reason-content-box">
+                <i class="fa-solid fa-car"></i>
+                <div class="reason-content-box-text">
+                    <p>Free Shipping</p>
+                    <span>Free COD delivery nationwide for orders from $100</span>
+                </div>
+            </div>
+            <div class="reason-content-box">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <div class="reason-content-box-text">
+                    <p>Support 24/7</p>
+                    <span>Support for customer via hotline +84 123456789</span>
+                </div>
+            </div>
+            <div class="reason-content-box">
+                <i class="fa-solid fa-rotate"></i>
+                <div class="reason-content-box-text">
+                    <p>15 Days Refund</p>
+                    <span>Support for customer refund via social networking platforms</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="team mt-5 mb-5">
+    <div class="container">
+        <h3 class="mb-4" data-aos="zoom-in-right">
+            <strong>Our Team</strong>
+        </h3>
+        <div class="team-card">
+            <div class="team-content" data-aos="zoom-in">
+                <div class="team-content-top">
+                    <img src='@Url.Content("~/images/logo/avatar1.png")' alt="">
+                </div>
+                <div class="team-content-bottom">
+                    <div class="quotes-top">
+                        <i class="fa-solid fa-quote-right"></i>
+                    </div>
+                    <div class="quotes-bottom">
+                        <i class="fa-solid fa-quote-left"></i>
+                    </div>
+                    <h4><strong>Nguyen Minh Hieu</strong></h4>
+                    <span>Back End</span>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt, nulla harum nihil quos autem
+                        saepe nam.</p>
+                    <div class="d-flex justify-content-center align-items-center gap-3">
+                        <a href="#">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="team-content" data-aos="zoom-in" data-aos-delay="500">
+                <div class="team-content-top">
+                    <img src='@Url.Content("~/images/logo/avatar2.png")' alt="">
+                </div>
+                <div class="team-content-bottom">
+                    <div class="quotes-top">
+                        <i class="fa-solid fa-quote-right"></i>
+                    </div>
+                    <div class="quotes-bottom">
+                        <i class="fa-solid fa-quote-left"></i>
+                    </div>
+                    <h4><strong>Nguyen Lam Chuc</strong></h4>
+                    <span>Front End</span>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt, nulla harum nihil quos autem
+                        saepe nam.</p>
+                    <div class="d-flex justify-content-center align-items-center gap-3">
+                        <a href="#">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fa-brands fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        $(".view-more button").click(function () {
+            const url = $(this).next().attr("href");
+            location.href = url;
+        });
+    });
+</script>
+}

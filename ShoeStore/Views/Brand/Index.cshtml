@@ -1,0 +1,86 @@
+@model IEnumerable<Brand>
+
+@{
+    ViewData["Title"] = "Brand Management" + " ";
+    Layout = "_AdminLayout";
+}
+
+<div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+    <div class="admin-title">
+        <ion-icon name="settings-outline"></ion-icon>
+        <div class="admin-title-content">
+            <h5>Brand Management</h5>
+            <span>This dashboard is created to manage products and invoices</span>
+        </div>
+    </div>
+    <div class="option-create">
+        <a asp-action="Create" class="btn-create">
+            Create New <i class="fa-solid fa-circle-plus"></i>
+        </a>
+    </div>
+</div>
+
+<table id="table_id" class="display cell-border">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Edited)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Created)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Edited)
+                </td>
+                <td class="dt-nowrap">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn-option" role="button"data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Edit">
+                        <i class="fa-regular fa-pen-to-square"></i>
+                    </a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn-option" role="button" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Details">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn-option" role="button" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Detele">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts
+{
+<script src="js/EnableDataTable.js"></script>
+}

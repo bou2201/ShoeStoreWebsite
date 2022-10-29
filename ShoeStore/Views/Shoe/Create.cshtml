@@ -1,0 +1,93 @@
+@model ShoeStore.Models.Shoe
+
+@{
+    ViewData["Title"] = "Shoe Create" + " ";
+    Layout = "_AdminLayout";
+}
+
+<div class="admin-title mt-4 mb-4">
+    <ion-icon name="settings-outline"></ion-icon>
+    <div class="admin-title-content">
+        <h5>Shoe Management</h5>
+        <span>This dashboard is created to manage products and invoices</span>
+    </div>
+</div>
+
+<hr />
+
+<div class="container p-0">
+    <h3 class="title-option mb-4">Create</h3>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="BrandId" class="form-label"></label>
+                <select asp-for="BrandId" class="form-select" asp-items="ViewBag.BrandId"></select>
+                <span asp-validation-for="BrandId" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="CategoryId" class="form-label">Category</label>
+                <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.CategoryId">
+                </select>
+            </div>
+        </div>
+        <div class="mb-3 col-md-12">
+            <label asp-for="Note" class="form-label"></label>
+            <input asp-for="Note" class="form-control" />
+            <span asp-validation-for="Note" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3 col-md-6">
+                <label asp-for="Features" class="form-label"></label>
+                <textarea asp-for="Features" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Features" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+            <div class="d-flex h-100 flex-column justify-content-end">
+                <div class="form-check form-active">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Active" checked="checked" /> @Html.DisplayNameFor(model =>
+                        model.Active)
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center gap-3 mt-4">
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn-save" />
+            </div>
+            <div>
+                <a asp-action="Index" class="btn-back">Back to List</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    <script src="https://cdn.tiny.cloud/1/lfdo7t0vx08h5t8cri8x87ev30fpw0tmfk9fhgi9klmzetm6/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+          selector: 'textarea',
+          plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect',
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+          tinycomments_mode: 'embedded',
+          tinycomments_author: 'Author name',
+          mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+          ]
+        });
+    </script>
+}

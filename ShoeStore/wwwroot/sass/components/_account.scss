@@ -1,0 +1,43 @@
+.sign-up-btn,
+.contact-btn {
+    @include buttonGradient(100rem);
+    padding: 10px 30px;
+
+    &:hover {
+        transform: translate(10px);
+    }
+}
+
+.log-in-btn {
+    display: block;
+    margin: auto;
+    @include buttonGradient(100rem);
+    padding: 10px 30px;
+
+    &:hover {
+        transform: translate(10px);
+    }
+}
+
+.check-remember:checked {
+    background-color: $third-color  !important;
+    border-color: $third-color  !important;
+}
+
+.form-check-input:focus {
+    border-color: $third-color  !important;
+    outline: 0;
+    box-shadow: none !important;
+}
+
+.nav-pills .nav-link.active {
+    @include backgroundGradient;
+    pointer-events: none;
+}
+
+// .nav-pills {
+//     .nav-item .nav-link:hover{
+//         color: #fff;
+//         @include backgroundGradient;
+//     }
+// }

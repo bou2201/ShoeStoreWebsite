@@ -1,0 +1,84 @@
+@model ShoeStore.Models.Shoe
+
+@{
+    ViewData["Title"] = "Shoe Details" + " ";
+    Layout = "_AdminLayout";
+}
+
+<div class="admin-title mt-4 mb-4">
+    <ion-icon name="settings-outline"></ion-icon>
+    <div class="admin-title-content">
+        <h5>Shoe Management</h5>
+        <span>This dashboard is created to manage products and invoices</span>
+    </div>
+</div>
+
+<hr />
+<div class="container p-0">
+    <h3 class="title-option mb-4">Details</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div class="row">
+        <div class="col-md-12 mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input readonly asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="BrandId" class="form-label"></label>
+            <input readonly="readonly" class="form-control" value="@Model.Brand.Name" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="CategoryId" class="form-label">Category</label>
+            <input readonly="readonly" class="form-control" value="@Model.Category.Name" />
+        </div>
+    </div>
+    <div class="mb-3 col-md-12">
+        <label asp-for="Note" class="form-label"></label>
+        <input readonly="readonly" asp-for="Note" class="form-control" />
+    </div>
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label asp-for="Features" class="form-label"></label>
+            <div class="form-textarea">@Html.Raw(Model.Features)</div>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label asp-for="Description" class="form-label"></label>
+            <div class="form-textarea">@Html.Raw(Model.Description)</div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+        <div class="d-flex h-100 flex-column justify-content-end">
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input disabled="disabled" class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model
+                    => model.Active)
+                </label>
+            </div>
+        </div>
+    </div>
+
+    @*-- Color Variant --*@
+
+    <div class="color-variant">
+        <h3 class="title-option mb-4 mt-5">Color Variants List</h3>
+        <div class="d-flex justify-content-start align-items-center flex-wrap gap-4">
+            @foreach (var e in Model?.ShoeColors ?? Enumerable.Empty<ShoeColor>())
+            {
+                <div class="position-relative">
+                    <span class="color-variant-name">@e.Color?.Name</span>
+                    <a asp-controller="ShoeColors" asp-action="Edit" asp-route-id="@e.Id">
+                        <div class="color-variant-img">
+                            <img src="@e.Images?.First().Path" alt="">
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+        <div class="d-flex justify-content-center align-items-center gap-3 mt-4 mb-4">
+            <a class="btn-save" asp-controller="ShoeColors" asp-action="Create" asp-route-shoeId="@Model.Id">
+                Add Color</a>
+            <a asp-action="Index" class="btn-back">Back to List</a>
+        </div>
+    </div>
+</div>

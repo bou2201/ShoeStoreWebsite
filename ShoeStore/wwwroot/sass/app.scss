@@ -1,0 +1,26 @@
+// Command watch SASS: sass wwwroot/sass/app.scss wwwroot/css/app.css --watch
+
+@import "variable";
+@import "reset";
+@import "mixins";   
+@import "base";
+@import "block/header";
+@import "block/footer";
+@import "components/product";
+@import "components/reason-banner";
+@import "components/team";
+@import "components/contact";
+@import "components/hero";
+@import "components/account";
+@import "components/list-product";
+@import "components/carousel";
+@import "components/filter";
+@import "components/detail";
+@import "components/cart";
+@import "components/checkout";
+@import "components/order";
+@import "admin/sidebar";
+@import "admin/navbar";
+@import "admin/table";
+@import "admin/option";
+@import "admin/content";

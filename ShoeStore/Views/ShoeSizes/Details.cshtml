@@ -1,0 +1,36 @@
+﻿@* @model ShoeStore.Models.ShoeSize *@
+@* *@
+@* @{ *@
+@*     ViewData["Title"] = "Details"; *@
+@* } *@
+@* *@
+@* <h1>Details</h1> *@
+@* *@
+@* <div> *@
+@*     <h4>ShoeSize</h4> *@
+@*     <hr /> *@
+@*     <dl class="row"> *@
+@*         <dt class = "col-sm-2"> *@
+@*             @Html.DisplayUnitFor(model => model.Quantity) *@
+@*         </dt> *@
+@*         <dd class = "col-sm-10"> *@
+@*             @Html.DisplayFor(model => model.Quantity) *@
+@*         </dd> *@
+@*         <dt class = "col-sm-2"> *@
+@*             @Html.DisplayUnitFor(model => model.ShoeColor) *@
+@*         </dt> *@
+@*         <dd class = "col-sm-10"> *@
+@*             @Html.DisplayFor(model => model.ShoeColor.Id) *@
+@*         </dd> *@
+@*         <dt class = "col-sm-2"> *@
+@*             @Html.DisplayUnitFor(model => model.Size) *@
+@*         </dt> *@
+@*         <dd class = "col-sm-10"> *@
+@*             @Html.DisplayFor(model => model.Size.Unit) *@
+@*         </dd> *@
+@*     </dl> *@
+@* </div> *@
+@* <div> *@
+@*     $1$  <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></a> | #1# *@
+@*     <a asp-action="Index" class="btn btn-secondary">Back to List</a> *@
+@* </div> *@

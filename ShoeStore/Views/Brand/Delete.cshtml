@@ -1,0 +1,52 @@
+@model ShoeStore.Models.Brand
+
+@{
+    ViewData["Title"] = "Brand Delete" + " ";
+    Layout = "_AdminLayout";
+}
+
+<div class="admin-title mt-4 mb-4">
+    <ion-icon name="settings-outline"></ion-icon>
+    <div class="admin-title-content">
+        <h5>Brand Management</h5>
+        <span>This dashboard is created to manage products and invoices</span>
+    </div>
+</div>
+
+<hr />
+<div>
+    <h3 class="title-option mb-4">Delete</h3>
+    <div class="row">
+        <div class="col-sm-2 mb-3">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="col-sm-10 mb-3">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+        <div class="col-sm-2 mb-3">
+            @Html.DisplayNameFor(model => model.Description)
+        </div>
+        <div class="col-sm-10 mb-3">
+            @Html.DisplayFor(model => model.Description)
+        </div>
+        <div class="col-sm-2 mb-3">
+            @Html.DisplayNameFor(model => model.Created)
+        </div>
+        <div class="col-sm-10 mb-3">
+            @Html.DisplayFor(model => model.Created)
+        </div>
+        <div class="col-sm-2 mb-3">
+            @Html.DisplayNameFor(model => model.Edited)
+        </div>
+        <div class="col-sm-10 mb-3">
+            @Html.DisplayFor(model => model.Edited)
+        </div>
+    </div>
+
+    <form asp-action="Delete" class="d-flex justify-content-start align-items-center gap-4 mt-4">
+        <h4 class="fw-bold mb-0">Are you sure you want to delete?</h4>
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn-save" />
+        <a asp-action="Index" class="btn-back">Back to List</a>
+    </form>
+</div>

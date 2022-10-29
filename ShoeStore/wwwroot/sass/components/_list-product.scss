@@ -1,0 +1,129 @@
+.list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+
+    .btn-category {
+        background-color: transparent;
+        color: #121212;
+        font-weight: 500;
+        font-size: 18px;
+        border-radius: 0 100rem 100rem 100rem;
+        border: 1px solid $primary-color;
+        transition: all 0.4s ease-in-out;
+        padding: 10px 20px;
+
+        &:hover,
+        &:focus {
+            @include backgroundGradient;
+            color: white;
+            transform: translateY(-10px);
+        }
+    }
+
+    &-filter {
+        flex-basis: calc(25% - 30px);
+        font-family: 'Raleway', sans-serif;
+        transition: all 0.5s ease-in-out;
+
+        @include responsive(max_lg) {
+            flex-basis: 100%;
+        }
+
+        .form-check {
+            transition: all 0.25s linear;
+            margin-bottom: 0.45rem;
+
+            &-input:checked {
+                background-color: $third-color;
+                border-color: $third-color;
+            }
+
+            &-input:focus {
+                box-shadow: 0 0 0 0.25rem rgba(253, 97, 13, 0.25);
+            }
+        }
+
+        .btn-submit {
+            button {
+                display: block;
+                margin: 0 auto;
+                @include buttonGradient(100rem);
+                padding: 12px 22px;
+                transition: all 0.25s linear;
+                box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px,
+                    rgba(0, 0, 0, 0.07) 0px 2px 2px,
+                    rgba(0, 0, 0, 0.07) 0px 4px 4px,
+                    rgba(0, 0, 0, 0.07) 0px 8px 8px,
+                    rgba(0, 0, 0, 0.07) 0px 16px 16px;
+                border-radius: 10px;
+
+                &:hover {
+                    transform: translateY(-10px);
+                }
+            }
+        }
+    }
+
+    &-product {
+        flex-basis: 75%;
+        display: flex;
+        flex-direction: column;
+
+        @include responsive(max_lg) {
+            flex-basis: 100%;
+        }
+
+        .form-select {
+            border-radius: 10px;
+
+            &:focus {
+                border-color: $primary-color  !important;
+                box-shadow: 0 0 0 0.25rem rgba(253, 57, 13, 0.25) !important;
+            }
+        }
+
+        &-top {
+            display: inherit;
+            justify-content: space-between;
+            flex-basis: 100%;
+
+            h3::after {
+                @include underlinedTitle;
+            }
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.pagi {
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+
+    &-item {
+        font-weight: 500;
+        list-style: none;
+        margin: 0 10px;
+        font-size: 20px;
+        color: #999;
+        cursor: pointer;
+        transition: all 0.2s linear;
+    }
+
+    &-item.is-disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    &-item:hover,
+    &-item.is-active {
+        color: $third-color;
+    }
+}

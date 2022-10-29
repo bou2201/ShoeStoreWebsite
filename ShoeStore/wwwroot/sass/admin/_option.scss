@@ -1,0 +1,206 @@
+.option-create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+
+    a {
+        color: $third-color;
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.3s linear;
+
+        &:hover {
+            color: $fourth-color;
+        }
+    }
+}
+
+.btn-save {
+    @include backgroundGradient;
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: #fff;
+    text-transform: uppercase;
+    border: none;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+
+    &:hover {
+        color: #fff;
+    }
+}
+
+.btn-back {
+    color: #121212;
+    padding: 11px 20px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    transition: all 0.3s linear;
+    background-color: rgba(239, 162, 137, 0.3);
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+
+    &:hover {
+        color: #fff;
+        @include backgroundGradient;
+    }
+}
+
+// .form-active {
+.form-check-input:checked {
+    background-color: $third-color !important;
+    border-color: $third-color !important;
+}
+
+// }
+
+.form-select {
+    &:focus {
+        border-color: $third-color !important;
+        box-shadow: 0 0 0 0.25rem rgb(253 57 13 / 25%) !important;
+    }
+}
+
+.form-textarea {
+    overflow-x: hidden;
+    background-color: #fff;
+    max-height: 250px;
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+
+.title-option {
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+
+    &::before {
+        content: '';
+        display: inline-block;
+        width: 10px;
+        height: 30px;
+        border-radius: 4px;
+        @include backgroundGradient;
+    }
+}
+
+.color-variant {
+    &-img {
+        width: 250px;
+        height: auto;
+        overflow: hidden;
+        transition: all 0.3s linear;
+        background-color: #fff;
+        box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+        border-radius: 10px;
+
+        img {
+            transition: all 0.3s linear;
+        }
+    }
+
+    &-name {
+        position: absolute;
+        z-index: 10;
+        left: 50%;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        transform: translateX(-50%);
+    }
+}
+
+.shoeImage {
+    .sort-options {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        display: flex;
+        gap: 10px;
+
+        select {
+            border-radius: 4px;
+        }
+    }
+
+    .carousel-main {
+        .flickity-viewport {
+            height: 500px !important;
+            box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+            border-radius: 10px;
+        }
+
+        .carousel-cell {
+            img {
+                height: 500px;
+            }
+        }
+    }
+
+    .carousel-nav {
+        .flickity-viewport {
+            height: 140px !important;
+            background-color: #eee;
+        }
+
+        .carousel-cell {
+            height: 140px !important;
+            width: 140px !important;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+
+            img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    }
+
+    .carousel {
+        background: #FAFAFA;
+        margin-bottom: 40px;
+    }
+
+    .carousel-cell {
+        width: 100%;
+        height: 100%;
+        margin-right: 10px;
+        background: #fff;
+        border-radius: 5px;
+    }
+
+    .carousel-nav .carousel-cell.is-nav-selected {
+        opacity: 1;
+        box-shadow: rgb(232, 205, 204) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    }
+
+    .flickity-prev-next-button.previous {
+        left: -70px;
+    }
+
+    .flickity-prev-next-button.next {
+        right: -70px;
+    }
+}
+
+.btn-add-img {
+    position: absolute;
+    top: 80%;
+    right: -120px;
+    width: 80px;
+    height: auto;
+}
+
+#model-upload-image {
+    .gallery {
+        img {
+            width: 32%;
+        }
+    }
+}

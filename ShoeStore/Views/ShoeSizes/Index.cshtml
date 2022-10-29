@@ -1,0 +1,47 @@
+﻿@* @model IEnumerable<ShoeStore.Models.ShoeSize> *@
+@* *@
+@* @{ *@
+@*     ViewData["Title"] = "Index"; *@
+@* } *@
+@* *@
+@* <h1>Index</h1> *@
+@* *@
+@* <p> *@
+@*     <a asp-action="Create" class="btn btn-outline-primary">Create New <i class="fa-solid fa-circle-plus"></i></a> *@
+@* </p> *@
+@* <table class="table"> *@
+@*     <thead> *@
+@*         <tr> *@
+@*             <th> *@
+@*                 @Html.DisplayUnitFor(model => model.Quantity) *@
+@*             </th> *@
+@*             <th> *@
+@*                 @Html.DisplayUnitFor(model => model.ShoeColor) *@
+@*             </th> *@
+@*             <th> *@
+@*                 @Html.DisplayUnitFor(model => model.Size) *@
+@*             </th> *@
+@*             <th></th> *@
+@*         </tr> *@
+@*     </thead> *@
+@*     <tbody> *@
+@* @foreach (var item in Model) { *@
+@*         <tr> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.Quantity) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.ShoeColor.Id) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.Size.Unit) *@
+@*             </td> *@
+@*             <td> *@
+@*                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | *@
+@*                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> | *@
+@*                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> *@
+@*             </td> *@
+@*         </tr> *@
+@* } *@
+@*     </tbody> *@
+@* </table> *@

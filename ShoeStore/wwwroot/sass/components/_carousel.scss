@@ -1,0 +1,72 @@
+.carousel {
+    background: transparent;
+    margin-bottom: 20px;
+}
+
+.carousel-cell {
+    width: 100%;
+    height: 600px;
+    margin-right: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    @include responsive(max_lg) {
+        height: 400px;
+    }
+
+    @include responsive(max_md) {
+        height: 500px;
+    }
+
+    @include responsive(max_sm) {
+        height: 300px;
+    }
+
+    // &:first-child {
+    //     background: url('../../images/product/MLB/Chunky-liner.jpg');
+    //     @include parallax;
+    // }
+
+    // &:nth-child(2) {
+    //     background: url('../../images/product/MLB/Chunky-liner1.jpg');
+    //     @include parallax;
+    // }
+
+    // &:nth-child(3) {
+    //     background: url('../../images/product/MLB/Chunky-liner2.jpg');
+    //     @include parallax;
+    // }
+
+    // &:last-child {
+    //     background: url('../../images/product/MLB/Chunky-liner3.jpg');
+    //     @include parallax;
+    // }
+}
+
+.carousel-nav {
+    .carousel-cell {
+        height: 80px;
+        width: 100px;
+
+        &:before {
+            font-size: 50px;
+            line-height: 80px;
+        }
+    }
+
+    .carousel-cell.is-nav-selected {
+        opacity: 0.8;
+        box-shadow:
+            rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+            rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    }
+}
+
+// .flickity-viewport {
+//     @include responsive(max_md) {
+//         height: 500px !important;
+//     }
+// }

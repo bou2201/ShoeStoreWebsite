@@ -1,0 +1,11 @@
+﻿@model List<CartItem>
+
+<div class="header-cart">
+    <a asp-area="" asp-controller="Cart" asp-action="Index" asp-route-returnUrl="@ViewContext.HttpContext.Request.PathAndQuery()" class="position-relative">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="position-absolute top-0 start-100 badge rounded-pill bg-danger">
+            @* @Model.Lines.Sum(e => e.Quantity) *@
+            @Model.Count
+        </span>
+    </a>
+</div>

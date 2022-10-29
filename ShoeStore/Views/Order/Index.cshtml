@@ -1,0 +1,136 @@
+﻿@model IEnumerable<ShopOrder>
+
+@{
+    ViewData["Title"] = "Order";
+    Layout = "_Layout";
+
+    var status = Context.Request.Query["status"];
+    string pending = "";
+    string inprocess = "";
+    string completed = "";
+    string approved = "";
+    string all = "";
+
+    switch (status)
+    {
+        case "pending":
+            pending = "active";
+            break;
+        case "inprocess":
+            inprocess = "active";
+            break;
+        case "completed":
+            completed = "active";
+            break;
+        case "approved":
+            approved = "active";
+            break;
+        default:
+            all = "active";
+            break;
+    }
+}
+
+<div class="container mb-5">
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-4">
+        <div class="admin-title">
+            <ion-icon name="settings-outline"></ion-icon>
+            <div class="admin-title-content">
+                <h5>Order Management</h5>
+                <span>List order on system</span>
+            </div>
+        </div>
+        <div class="list-group list-group-horizontal-sm d-none d-lg-flex">
+            <a class="text-nowrap list-group-item list-group-item-action @inprocess" asp-controller="Order"
+                asp-action="Index" asp-route-status="inprocess">
+                In Process
+            </a>
+            <a class="text-nowrap list-group-item list-group-item-action @pending" asp-controller="Order"
+                asp-action="Index" asp-route-status="pending">
+                Payment Pending
+            </a>
+            <a class="text-nowrap list-group-item list-group-item-action @completed" asp-controller="Order"
+                asp-action="Index" asp-route-status="completed">
+                Completed
+            </a>
+            <a class="text-nowrap list-group-item list-group-item-action @approved" asp-controller="Order"
+                asp-action="Index" asp-route-status="approved">
+                Approved
+            </a>
+            <a class="text-nowrap list-group-item list-group-item-action @all" asp-controller="Order" asp-action="Index"
+                asp-route-status="all">
+                All
+            </a>
+        </div>
+    </div>
+
+    <table id="table_id" class="display cell-border w-100">
+        <thead>
+            <tr>
+                <th class="d-none d-lg-table-cell">
+                    Id
+                </th>
+                <th >
+                    Name
+                </th>
+                <th class="d-none d-lg-table-cell">
+                    Phone
+                </th>
+                <th class="d-none d-lg-table-cell">
+                    Email
+                </th>
+                <th class="d-none d-lg-table-cell">
+                    Status
+                </th>
+                <th>
+                    Total($)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ShopOrder item in Model)
+            {
+                <tr>
+                    <td class="d-none d-lg-table-cell">
+                        @item.Id
+                    </td>
+                    <td >
+                        @item.Name
+                    </td>
+                    <td class="d-none d-lg-table-cell">
+                        @item.PhoneNumber
+                    </td>
+                    <td class="d-none d-lg-table-cell">
+                        @if (item.ApplicationUser != null)
+                        {
+                            @item.ApplicationUser.Email
+                        }
+                    </td>
+                    <td class="d-none d-lg-table-cell">
+                        @item.OrderStatus
+                    </td>
+                    <td>
+                        @item.OrderTotal
+                    </td>
+                    <td class="dt-nowrap">
+                        @* <a asp-action="Edit" asp-route-id="@item.Id" class="btn-option" role="button"
+                            data-bs-toggle="tooltip" *@
+                        @* data-bs-placement="bottom" title="Edit"> *@
+                        @* <i class="fa-regular fa-pen-to-square"></i> *@
+                        @* </a> *@
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn-option" role="button"
+                        data-bs-toggle="tooltip" data-bs-placement="bottom" title="Details">
+                            <i class="fa-solid fa-circle-info"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts
+{
+<script src="js/EnableDataTable.js"></script>
+}

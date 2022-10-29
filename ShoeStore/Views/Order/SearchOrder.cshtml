@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "Search Order";
+    Layout = "_Layout";
+}
+
+<div class="container my-5">
+    <h3 class="title-option mb-4 justify-content-center">Find your Order by Phone number</h3>
+    <form asp-action="Index">
+        <div class="row justify-content-center">
+            <div class="col-md-auto text-center">
+                <label class="form-label">Enter your phone number</label>
+                <input class="form-control p-2" type="tel" name="phoneNumber">
+                <button class="btn-save mt-4">Find</button>
+            </div>
+        </div>
+    </form>
+</div>

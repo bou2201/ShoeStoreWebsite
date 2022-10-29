@@ -1,0 +1,20 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "Payment Confirmation";
+    Layout = "_Layout";
+}
+
+<div class="container my-5">
+    <div class="text-center">
+        <h1 class="text-primary text-center">Payment Successfull!</h1>
+        <p>Order Number : @Model</p>
+        <img class="img-fluid mx-auto" src="~/images/others/thank_you.jpeg" />
+    </div>
+    <div class="text-center" style="color: maroon;">
+        Payment has been applied successfully! <br/>
+        <a asp-controller="Order" asp-action="Details" asp-route-id="@Model" class="btn btn-primary">
+            Back to Order Details
+        </a>
+    </div>
+</div>

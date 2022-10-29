@@ -1,0 +1,84 @@
+.dataTables_wrapper {
+    position: relative;
+    clear: both;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px 30px;
+    box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+
+    .dataTables_length,
+    .dataTables_filter {
+        margin-bottom: 20px;
+
+        label {
+            padding: 10px 20px;
+            border-radius: 10px;
+            // background: #eee;
+            box-shadow: rgb(232, 205, 204) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+
+            input,
+            select {
+                border-radius: 8px;
+                margin: 0 5px;
+                height: 36px;
+            }
+
+            input {
+                padding: 5px 10px;
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .dataTables_info {
+        margin-top: 22px;
+    }
+
+    .dataTables_paginate {
+        margin-top: 20px;
+        transition: all 0.3s linear;
+
+        .paginate_button {
+            border-radius: 10px !important;
+
+            &.current,
+            &:hover {
+                color: #fff !important;
+                background: linear-gradient(to top right, $primary-color, $third-color) !important;
+                border: 1px solid $third-color  !important;
+            }
+        }
+    }
+}
+
+table.dataTable tbody td {
+    padding: 8px 20px !important;
+}
+
+table.dataTable thead th {
+    padding: 14px 20px !important;
+}
+
+table.dataTable.no-footer {
+    box-shadow: rgb(232, 205, 204) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    border-radius: 10px;
+}
+
+table.dataTable.cell-border tbody tr th:first-child,
+table.dataTable.cell-border tbody tr td:first-child {
+    border-left: none !important;
+}
+
+.btn-option {
+    color: $third-color;
+    font-size: 18px;
+    transition: all 0.3s linear;
+    margin-right: 10px;
+    border: none;
+    background: transparent;
+
+    &:hover {
+        transform: translateY(-10px);
+        color: $fourth-color  !important;
+    }
+}

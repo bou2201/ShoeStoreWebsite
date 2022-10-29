@@ -1,0 +1,243 @@
+.checkout-form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+
+    @include responsive(max_lg) {
+        flex-wrap: wrap;
+    }
+
+    &-left {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 65%;
+        gap: 30px;
+
+        @include responsive(max_lg) {
+            flex-basis: 100%;
+        }
+    }
+
+    &-right {
+        display: flex;
+        flex-direction: column;
+        flex-basis: 35%;
+        color: white;
+
+        @include responsive(max_lg) {
+            flex-basis: 100%;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid rgba(222, 226, 230, 0.3) !important;
+        }
+
+        .text-muted {
+            color: #d7dfe6 !important;
+        }
+
+        h5 {
+            margin-bottom: 0;
+        }
+
+        .btn-proceed {
+            background: transparent;
+            color: #ffffffc9;
+            display: block;
+            margin: 0 auto;
+            border: 1px solid rgba(222, 226, 230, 0.3) !important;
+            border-radius: 100rem;
+            padding: 12px 22px;
+            margin-top: 40px;
+            transition: all 0.25s linear;
+
+            &:hover {
+                @include buttonGradient(100rem);
+                padding: 12px 22px;
+                font-size: 16px;
+                transform: translateY(-10px);
+            }
+        }
+    }
+
+    h3::after {
+        @include underlinedTitle;
+    }
+}
+
+.order-expand {
+    .coupon-code {
+        position: relative;
+
+        .input-coupon {
+            width: 100%;
+            background-color: #fff;
+            display: block;
+            border-radius: 10px;
+            color: #121212;
+            font-size: 15px;
+            font-weight: 500;
+            height: 50px;
+            margin: 0;
+            padding: 0 150px 0 20px;
+            text-transform: capitalize;
+            border: none;
+        }
+
+        .btn-coupon {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            border: none;
+            right: 6px;
+            font-size: 16px;
+            color: #fff;
+            border-radius: 10px;
+            padding: 8px 18px;
+            @include backgroundGradient;
+            transition: all 0.4s linear;
+
+            p {
+                margin-bottom: 0;
+                display: inline-block;
+                margin-left: 10px;
+                font-size: 16px;
+            }
+
+            &:hover {
+                transform: translateX(-10px);
+            }
+        }
+    }
+
+    .instructions {
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
+}
+
+.order-info,
+.order-expand {
+    color: white;
+}
+
+.order-info {
+    .shipping-address {
+        .form-label {
+            opacity: 0.85;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 10px;
+            padding: 0.6rem .75rem;
+        }
+    }
+
+    .order-payment {
+        margin-top: 50px;
+        margin-bottom: 10px;
+
+        .accordion-item {
+            background: transparent;
+            color: #fff;
+
+            .form-label {
+                opacity: 0.85;
+                font-size: 14px;
+            }
+
+            .form-control {
+                border-radius: 10px;
+                padding: 0.6rem 3.35rem;
+            }
+
+            .accordion-header {
+                background: transparent;
+                color: #fff;
+
+                .accordion-button {
+                    display: flex;
+                    gap: 15px;
+                    background: transparent;
+                    color: #fff;
+                    border-radius: 10px;
+                    transition: all 0.4s linear;
+                    margin: 10px 0;
+
+                    img {
+                        width: 36px;
+                        height: auto;
+                    }
+
+                    &::after {
+                        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+                    }
+
+                    &:focus {
+                        box-shadow: none;
+                    }
+                }
+
+                button {
+
+                    &:not(.collapsed),
+                    &:hover {
+                        @include buttonGradient(10px);
+                        padding: 1rem 1.25rem;
+                        font-size: 1rem;
+                    }
+                }
+            }
+
+            .accordion-body {
+                .icon-methods {
+                    position: absolute;
+                    bottom: 13px;
+                    left: 42px;
+                    color: #121212;
+                    font-size: 18px;
+                }
+
+                .btn-confirm {
+                    background: transparent;
+                    color: #ffffffc9;
+                    display: block;
+                    margin: 0 auto;
+                    border: 1px solid rgba(222, 226, 230, 0.3) !important;
+                    border-radius: 100rem;
+                    padding: 12px 22px;
+                    margin-top: 40px;
+                    transition: all 0.25s linear;
+
+                    &:hover {
+                        @include buttonGradient(100rem);
+                        padding: 12px 22px;
+                        font-size: 16px;
+                        transform: translateY(-10px);
+                    }
+                }
+
+                span {
+                    font-style: inherit;
+                    font-size: 14px;
+                    margin: 0 0 0 10px;
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}
+
+.shipping-address span,
+.order-payment span,
+.checkout-form-right span,
+.order-expand span {
+    display: inline-block;
+    font-style: oblique;
+    opacity: 0.9;
+    margin: 15px 0;
+    font-size: 15px;
+}

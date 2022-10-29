@@ -1,0 +1,51 @@
+@model ShoeStore.Models.Brand
+
+@{
+    ViewData["Title"] = "Brand Details" + " ";
+    Layout = "_AdminLayout";
+}
+
+<div class="admin-title mt-4 mb-4">
+    <ion-icon name="settings-outline"></ion-icon>
+    <div class="admin-title-content">
+        <h5>Brand Management</h5>
+        <span>This dashboard is created to manage products and invoices</span>
+    </div>
+</div>
+
+<hr/>
+
+<div class="container p-0">
+    <h3 class="title-option mb-4">Details</h3>
+    <div class="row">
+        <div class="col-sm-2 mb-3">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="col-sm-10 mb-3">
+            @Html.DisplayFor(model => model.Name)
+        </div>
+        <div class="col-sm-2 mb-3">
+            @Html.DisplayNameFor(model => model.Description)
+        </div>
+        <div class="col-sm-10 mb-3">
+            @Html.DisplayFor(model => model.Description)
+        </div>
+        <div class="col-sm-2 mb-3">
+            @Html.DisplayNameFor(model => model.Created)
+        </div>
+        <div class="col-sm-10 mb-3">
+            @Html.DisplayFor(model => model.Created)
+        </div>
+        <div class="col-sm-2 mb-3">
+            @Html.DisplayNameFor(model => model.Edited)
+        </div>
+        <div class="col-sm-10 mb-3">
+            @Html.DisplayFor(model => model.Edited)
+        </div>
+    </div>
+    <div class="mt-3 d-flex gap-3">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn-save px-3"><i
+                class="fa-regular fa-pen-to-square"></i></a>
+        <a asp-action="Index" class="btn-back">Back to List</a>
+    </div>
+</div>

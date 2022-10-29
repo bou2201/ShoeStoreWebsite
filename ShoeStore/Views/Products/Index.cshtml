@@ -1,0 +1,147 @@
+@{
+    ViewData["Title"] = "List Product Page";
+}
+
+@model ShoeStore.Models.ViewModels.ProductListViewModel
+
+<div class="container">
+    <section class="list mt-lg-5 mt-4 mb-5">
+        <button class="btn-category d-lg-none" id="navbar-toggle">
+            <span>Filter</span>
+        </button>
+        <div class="list-filter d-lg-block hidden" id="navbar-collapse">
+            <h3>
+                <strong>Category</strong>
+            </h3>
+            <form id="search-product" method="get" asp-controller="Products" asp-action="Index">
+                <div class="budget-wrap mt-5">
+                    <h4 class="mb-3">Filter by price</h4>
+                    <div class="budget">
+                        <div class="content">
+                            <input type="range" name="maxPrice" min="1" max="300" value="@(Model.maxPrice ?? 300)" data-rangeslider>
+                            <div class="header">
+                                <div class="title clearfix mt-3">
+                                    <p>Price:</p>
+                                    <span class="pull-right"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-category mt-3">
+                    <h4 class="mb-3">Brand</h4>
+                    @for (var i = 0; i < Model.Brands.Count; i++)
+                    {
+                        var brand = Model.Brands[i];
+                        <div class="form-check">
+                            <label class="form-check-label" >
+                                <input class="form-check-input" type="radio" name="brand" value="@brand.Name" @(brand.Id == Model.SelectedBrandId? "checked": "")>
+                                @brand.Name
+                            </label>
+                        </div>
+                    }
+    
+                </div>
+                <div class="form-category mt-4">
+                    <h4 class="mb-3">Size</h4>
+                    @for (var i = 0; i < Model.Sizes.Count; i++)
+                    {
+                        var size = Model.Sizes[i];
+                        <div class="form-check">
+                            
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="size" value="@size.Value" @(size.Id == Model.SelectedSizeId? "checked": "")>
+                                @size.Value
+                            </label>
+                        </div>
+                    }
+    
+                </div>
+                <div class="btn-submit mt-4">
+                    <button type="submit" id="btn-search-products">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="list-product">
+            <div class="list-product-top">
+                <h3>
+                    <strong>@(Model.SearchedBrand ?? "Product")</strong>
+                </h3>
+                <div class="form-floating">
+                    <select class="form-select" id="sort-by" name="sort" aria-label="Floating label select example" form="search-product" asp-items="Model.SelectListItems">
+                        @* <option value="latest" selected>Latest</option> *@
+                        @* <option value="lowest">Price: Low to high</option> *@
+                        @* <option value="highest">Price: High to low</option> *@
+                    </select>
+                    <label for="sort-by">Sort by</label>
+                </div>
+            </div>
+            <div class="list-product-container">
+                <div class="product mt-4" data-aos="zoom-in">
+
+                    @foreach (var product in Model.ProductCards)
+                    {
+                        <div class="product-card">
+                            <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                                <div class="product-card-image">
+                                    <img loading="lazy" asp-append-version="true" src='@Url.Content(product?.ImagePath)' alt="">
+                                </div>
+                            </a>
+                            <div class="product-card-top">
+                                <span>@product.BrandName</span>
+                                <a asp-controller="Products" asp-action="Detail" asp-route-url="@product.Url">
+                                    <h6>@product.Name</h6>
+                                </a>
+                            </div>
+                            <div class="product-card-bottom">
+                                <h5>
+                                    <strong>$@product.Price</strong>
+                                </h5>
+                                <div>
+                                    <a href="">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </a>
+                                    <a href="">
+                                        <i class="fa-solid fa-bag-shopping"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+            @* pagi mt-5 *@
+            <div page-model="@Model?.PagingInfo" page-action="Index"
+                 page-classes-enabled="true" 
+                 page-class="pagi-item" 
+                 page-class-normal=""
+                 page-class-selected="is-active" 
+                 page-url-brand="@Model?.CurrentBrand"
+                 class="pagi mt-5">
+            </div>
+            @* <ul class="pagi mt-5"> *@
+            @*     <li class="pagi-item pagi-action pagi-prev is-disabled"> *@
+            @*         <i class="fas fa-angle-left"></i> *@
+            @*     </li> *@
+            @*     <li class="pagi-item is-active">1</li> *@
+            @*     <li class="pagi-item">2</li> *@
+            @*     <li class="pagi-item">3</li> *@
+            @*     <li class="pagi-item">4</li> *@
+            @*     <li class="pagi-item">5</li> *@
+            @*     <li class="pagi-item pagi-action pagi-next"> *@
+            @*         <i class="fas fa-angle-right"></i> *@
+            @*     </li> *@
+            @* </ul> *@
+        </div>
+    </section>
+</div>
+
+@section Scripts
+{
+    <script >
+        $("#sort-by").change(function() {
+          $("#btn-search-products").click();
+        })
+    </script>
+}

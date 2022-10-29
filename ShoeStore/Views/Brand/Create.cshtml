@@ -1,0 +1,41 @@
+@model Brand
+
+@{
+    ViewData["Title"] = "Brand Create" + " ";
+    Layout = "_AdminLayout";
+}
+
+<div class="admin-title mt-4 mb-4">
+    <ion-icon name="settings-outline"></ion-icon>
+    <div class="admin-title-content">
+        <h5>Brand Management</h5>
+        <span>This dashboard is created to manage products and invoices</span>
+    </div>
+</div>
+
+<hr/>
+
+<form asp-action="Create">
+    <h3 class="title-option mb-4">Create</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="d-flex justify-content-center flex-column align-items-center gap-3">
+        <div class="form-group col-md-6">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label asp-for="Description" class="form-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center align-items-center gap-3 mt-4">
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn-save" />
+        </div>
+        <div>
+            <a asp-action="Index" class="btn-back">Back to List</a>
+        </div>
+    </div>
+</form>

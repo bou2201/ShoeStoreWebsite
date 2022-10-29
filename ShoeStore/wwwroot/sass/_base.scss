@@ -1,0 +1,49 @@
+html {
+    position: relative;
+    scroll-behavior: smooth;
+    overflow: hidden scroll;
+}
+
+body {
+    font-family: $primary-font  !important;
+    scroll-behavior: smooth;
+}
+
+// Scrollbar
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, $third-color, $fourth-color);
+    border-radius: 50px;
+    border: 3px solid rgba(249, 136, 108, 0.5);
+    background-clip: content-box;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: rgba(249, 136, 108, 0.5);
+    border-radius: 50px;
+}
+
+// Back to top
+.back-to-top {
+    position: fixed;
+    scroll-behavior: smooth;
+    width: 50px;
+    height: 50px;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    margin: 1em;
+    border-radius: 50%;
+    color: white;
+    @include backgroundGradient;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

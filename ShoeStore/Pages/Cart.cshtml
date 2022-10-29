@@ -1,0 +1,310 @@
+﻿@*@page
+@model CartModel
+@{
+    ViewData["Title"] = "Shopping Cart Page";
+}
+
+<section class="cart mt-lg-5 mt-4 mb-5">
+    <div class="container">
+        <div class="cart-background">
+            <div class="cart-background-overlay"></div>
+            <div class="cart-shopping mb-4">
+                <h2>
+                    <strong>Shopping Cart</strong>
+                </h2>
+                <h5>@Model.CartViewModel.ProductCartsList.Count items</h5>
+            </div>
+
+            @foreach (var productCart in Model?.CartViewModel.ProductCartsList ?? Enumerable.Empty<ProductCartViewModel>())
+            {
+                <div class="cart-item">
+                    <div class="cart-item-name">
+                        <div class="cart-item-image">
+                            <img src='@Url.Content(productCart.ImgPath)' alt="">
+                        </div>
+                        <div class="cart-item-detail">
+                            <p>
+                                <a class="text-decoration-none text-white"
+                                   asp-controller="Products" asp-action="Detail" asp-route-url="@productCart.ProductUrl">
+                                    @productCart.ProductName
+                                </a>
+                            </p>
+                            <a class="text-decoration-none text-white"
+                               asp-controller="Products" asp-action="Index" asp-route-brand="@productCart.BrandName">
+                                <span>@productCart.BrandName</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="cart-item-price">
+                        <h5>$@productCart.Price</h5>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <form method="post" asp-page="/Cart" asp-page-handler="Subtract">
+                            <input type="hidden" name="productId" value="@productCart.ShoeSizeId">
+                            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl">
+                            <button class="btn btn-quantity px-2">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            $1$ <button class="btn btn-quantity px-2" #1#
+                            $1$         onclick="this.parentNode.querySelector('input[type=number]').stepDown()"> #1#
+                            $1$     <i class="fas fa-minus"></i> #1#
+                            $1$ </button> #1#
+                        </form>
+
+                        <input id="form1" min="1" name="quantity" value="@productCart.Quantity" type="number"
+                               class="no-arrow form-control form-control-sm" style="width: 20%;"
+                               form="update-cart"/>
+
+                        <form method="post">
+                            <input type="hidden" name="productId" value="@productCart.ShoeSizeId">
+                            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl">
+                            <button class="btn btn-quantity px-2">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            $1$ <button class="btn btn-quantity px-2" #1#
+                            $1$         onclick="this.parentNode.querySelector('input[type=number]').stepUp()"> #1#
+                            $1$     <i class="fas fa-plus"></i> #1#
+                            $1$ </button> #1#
+                        </form>
+                    </div>
+                    <div class="cart-item-remove">
+                        <form method="post" asp-page-handler="Delete">
+                            <input type="hidden" name="productId" value="@productCart.ShoeSizeId">
+                            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl">
+                            <button type="submit" style="display: contents">
+                                <i class="fa-solid fa-trash "></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+            }
+
+            <div class="cart-back mt-4">
+                <a href="@Model?.ReturnUrl">
+                    <i class="fa-solid fa-left-long"></i>
+                    <p>Continue shopping</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="checkout mt-5 mb-5">
+<div class="container">
+<div class="checkout-form">
+<div class="checkout-form-left">
+    <div class="order-info">
+        <div class="cart-background">
+            <div class="cart-background-overlay"></div>
+            <div class="shipping-address">
+                <h3>
+                    <strong>Shipping Address</strong>
+                </h3>
+                <span>Leave your information so shop can ship the goods to you in the fastest time.</span>
+                <form id="form-order" method="post" asp-controller="Order" asp-action="Checkout">
+                    <div class="row g-3 mt-1">
+                        <div class="col-md-6">
+                            <label asp-for="CartViewModel.Order.Name" class="form-label">Fullname</label>
+                            <input name="Name" class="form-control" asp-for="CartViewModel.Order.Name"
+                                   placeholder="E.g: Nguyen Van A">
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="CartViewModel.Order.Phone" class="form-label">Phone Number</label>
+                            <input name="Phone" class="form-control" asp-for="CartViewModel.Order.Phone"
+                                   placeholder="E.g: 0123456789">
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="CartViewModel.Order.Address" class="form-label">Address</label>
+                            <input name="Address" type="text" class="form-control" id="inputAddress"
+                                   placeholder="E.g: 123 NY Street, Suite 330...">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="city" class="form-label">City</label>
+                            <select name="City" id="city" asp-for="CartViewModel.Order.City" class="form-select"></select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="district" class="form-label">District</label>
+                            <select name="District" id="district" asp-for="CartViewModel.Order.District" class="form-select"></select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="ward" class="form-label">Ward</label>
+                            <select name="Ward" id="ward" asp-for="CartViewModel.Order.Ward" class="form-select"></select>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="order-payment">
+                <h3>
+                    <strong>Payment Method</strong>
+                </h3>
+                <span>Select 1 in 3 methods.</span>
+                <div class="accordion accordion-flush" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                                    aria-expanded="false" aria-controls="flush-collapseOne">
+                                <img src='@Url.Content("~/images/logo/paypal.svg")' alt="">
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row gy-3 gx-5">
+                                    <div class="col-12 position-relative">
+                                        <label for="inputEmailPaypal" class="form-label">Email</label>
+                                        <input type="text" class="form-control" id="inputEmailPaypal"
+                                               placeholder="Paypal Email...">
+                                        <i class="fa-solid fa-envelope icon-methods"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingTwo">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
+                                    aria-expanded="false" aria-controls="flush-collapseTwo">
+                                <img src='@Url.Content("~/images/logo/mastercard.svg")' alt="">
+                                <img src='@Url.Content("~/images/logo/visa.svg")' alt="">
+                                <img src='@Url.Content("~/images/logo/jcb.svg")' alt="">
+                            </button>
+                        </h2>
+                        <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                <div class="row gy-3 gx-5">
+                                    <div class="col-12 position-relative">
+                                        <label for="inputAddress" class="form-label">Card Number</label>
+                                        <input type="text" class="form-control" id="inputAddress"
+                                               placeholder="0000 0000 0000">
+                                        <i class="fa-regular fa-credit-card icon-methods"></i>
+                                    </div>
+                                    <div class="col-md-6 position-relative">
+                                        <label for="inputDate" class="form-label">Expiry Date</label>
+                                        <input type="email" class="form-control" id="inputDate"
+                                               placeholder="MM/YY">
+                                        <i class="fa-regular fa-calendar-days icon-methods"></i>
+                                    </div>
+                                    <div class="col-md-6 position-relative">
+                                        <label for="inputCVC" class="form-label">CVC/CVV</label>
+                                        <input type="text" class="form-control" id="inputCVC"
+                                               placeholder="000">
+                                        <i class="fa-solid fa-lock icon-methods"></i>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <i class="fa-solid fa-circle-info"></i>
+                                        <span>Your transaction is secured with ssl certificate</span>
+                                    </div>
+                                </div>
+                                <button class="btn-confirm" type="submit">
+                                    Confirm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
+                                    aria-expanded="false" aria-controls="flush-collapseThree">
+                                COD/ Cash On Delivery
+                            </button>
+                        </h2>
+                        <div id="flush-collapseThree" class="accordion-collapse collapse"
+                             aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                            $1$ <div class="accordion-body">Placeholder content for this accordion, which is
+                                            intended to demonstrate the <code>.accordion-flush</code> class. This is the
+                                            third item's accordion body. Nothing more exciting happening here in terms
+                                            of content, but just filling up the space to make it look, at least at first
+                                            glance, a bit more representative of how this would look in a real-world
+                                            application.</div> #1#
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="order-expand">
+        <div class="cart-background">
+            <div class="cart-background-overlay"></div>
+            <div class="coupon-code">
+                <h3>
+                    <strong>Coupon Code</strong>
+                </h3>
+                <span>If you have a coupon code, please enter it in the box below.</span>
+                <div class="d-flex justify-content-between align-items-center w-100 mt-3">
+                    <input type="text" class="input-coupon" placeholder="Apply Coupon">
+                    <button type="submit" class="btn-coupon">
+                        <i class="fa-solid fa-gift"></i>
+                        <p>Apply</p>
+                    </button>
+                </div>
+            </div>
+            <div class="instructions">
+                <h3>
+                    <strong>Instructions For Seller</strong>
+                </h3>
+                <span>
+                    If you have some information for the seller you can leave them in the box below.
+                    Please don't spam irrelevant stuff.
+                </span>
+                <div class="form-floating mt-3">
+                    <textarea class="form-control" placeholder="Leave some information here"
+                                    asp-for="CartViewModel.Order.Name" style="height: 80px; border-radius: 10px;"></textarea>
+                    <label for="floatingTextarea2" style="color: #121212;">
+                        Leave some information
+                        here
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="checkout-form-right">
+    <div class="cart-background">
+        <div class="cart-background-overlay"></div>
+        <h3>
+            <strong>Order Summary</strong>
+        </h3>
+        <span>Shipping and additional costs are calculated based on values you have entered.</span>
+        <div class="checkout-summary">
+            @{
+                decimal subtotal = Model.CartViewModel.ProductCartsList.Sum(e => e.Price * e.Quantity);
+                decimal shippingFee = 4;
+                decimal tax = 0.05M;
+                decimal total = subtotal + subtotal * tax + shippingFee;
+            }
+            <div class="d-flex justify-content-between align-items-center py-4 border-bottom">
+                <strong class="text-muted">Order Subtotal</strong>
+                <strong>@subtotal.ToString("C")</strong>
+            </div>
+            <div class="d-flex justify-content-between align-items-center py-4 border-bottom">
+                <strong class="text-muted">Shipping and handling</strong>
+                <strong>@shippingFee.ToString("C")</strong>
+            </div>
+            <div class="d-flex justify-content-between align-items-center py-4 border-bottom">
+                <strong class="text-muted">Tax</strong>
+                <strong>$@tax.ToString("P1")</strong>
+            </div>
+            <div class="d-flex justify-content-between align-items-center py-4 border-bottom">
+                <strong class="text-muted">Total</strong>
+                <h5>
+                    <strong>@total.ToString("C")</strong>
+                </h5>
+            </div>
+        </div>
+        <button form="form-order" class="btn-proceed" type="submit">Proceed to checkout</button>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+@section Scripts
+{
+    <script src="js/Province.js"></script>
+}*@
